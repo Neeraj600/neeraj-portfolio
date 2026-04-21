@@ -4,8 +4,8 @@
 <!-- v2.1 pipeline-redesign -->
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Neeraj Singh Guleria — Data Engineer</title>
-<meta name="description" content="Data Engineer · PySpark · dbt · Databricks · Snowflake · Building pipelines that actually work in production."/>
+<title>Neeraj Singh Guleria — Azure Data Engineer</title>
+<meta name="description" content="Azure Data Engineer · PySpark · dbt · Databricks · Snowflake · Building pipelines that actually work in production."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
@@ -285,6 +285,9 @@ const TOOLS = {
   'Grafana':             {bg:'rgba(242,113,43,0.12)',  border:'rgba(242,113,43,0.35)',  text:'#F7894A', icon:'📉'},
   'Star Schema':         {bg:'rgba(245,158,11,0.1)',   border:'rgba(245,158,11,0.3)',   text:'#FCD34D', icon:'⭐'},
   'SCD Type 2':          {bg:'rgba(139,92,246,0.1)',   border:'rgba(139,92,246,0.3)',   text:'#C4B5FD', icon:'🔀'},
+  'Delta Live Tables':  {bg:'rgba(0,173,216,0.12)', border:'rgba(0,173,216,0.38)', text:'#4DC8E8', icon:'△'},
+  'Azure SQL':           {bg:'rgba(0,120,212,0.12)', border:'rgba(0,120,212,0.38)', text:'#50B4FC', icon:'🔷'},
+  'Spark Streaming':     {bg:'rgba(226,90,28,0.12)', border:'rgba(226,90,28,0.38)', text:'#F0845C', icon:'⚡'},
   'Medallion Architecture':{bg:'rgba(0,120,212,0.1)', border:'rgba(0,120,212,0.3)',    text:'#93C5FD', icon:'🏗️'},
 };
 
@@ -310,7 +313,7 @@ const PIPELINE_DETAILS = {
 
 const STATS = [
   {num:'2+',   label:'Years Exp'},
-  {num:'10M+',  label:'Records/Mo'},
+  {num:'1M+',  label:'Records/Mo'},
   {num:'90%',  label:'Time Saved'},
   {num:'20+',  label:'ADF Pipelines'},
   {num:'100+', label:'Hrs Saved/Mo'},
@@ -322,7 +325,7 @@ const EXPERIENCE = [
     role:'Data Engineer', company:'Optiemus Electronics Ltd.', location:'Noida, India',
     period:'Mar 2024 – Present', color:'#0078D4',
     points:[
-      'Cut production analysis time by <b>90%</b> — automated 10M+ monthly logs through ADF → Databricks → Synapse pipeline.',
+      'Cut production analysis time by <b>90%</b> — automated 1M+ monthly logs through ADF → Databricks → Synapse pipeline.',
       'Built complete <b>Bronze → Silver → Gold medallion architecture</b> on ADLS Gen2 and Delta Lake from scratch.',
       'Introduced <b>dbt transformation models</b> with schema tests replacing untested ad-hoc SQL scripts.',
       'Implemented <b>Great Expectations</b> quality gates — broken data now caught before it reaches dashboards.',
@@ -351,7 +354,7 @@ const EXPERIENCE = [
 const DE_PROJECTS = [
   {
     title:'Azure Manufacturing Data Pipeline', type:'Production · Data Engineering', featured:true,
-    desc:'End-to-end ETL/ELT pipeline replacing manual log analysis for 10M+ monthly production records across SMT, Assembly, and Packaging lines.',
+    desc:'End-to-end ETL/ELT pipeline replacing manual log analysis for 1M+ monthly production records across SMT, Assembly, and Packaging lines. Built at Optiemus Electronics.',
     impact:['90% reduction in analysis time','100+ engineering hours saved/month','4 live Power BI dashboards used daily'],
     pipeline:['MES/ERP','ADF','Databricks','Delta Lake','Power BI'],
     pColors:['#8B5CF6','#0078D4','#FF3621','#F59E0B','#10B981'],
@@ -359,17 +362,53 @@ const DE_PROJECTS = [
     github:null,
   },
   {
-    title:'dbt + Snowflake Transformation Layer', type:'Analytics Engineering', featured:true,
-    desc:'Rebuilt ad-hoc SQL scripts into modular dbt models with staging, intermediate, and mart layers. Full schema test coverage, freshness checks, CI/CD via GitHub Actions.',
-    impact:['100% test coverage on critical models','Zero untested SQL in production','Analytics team fully self-serve'],
-    pipeline:['Source','dbt Staging','dbt Intermediate','dbt Marts','Snowflake'],
-    pColors:['#8B5CF6','#FF694A','#FF694A','#FF694A','#29B5E8'],
-    tags:['dbt','Snowflake','GitHub Actions','SQL','CI/CD','Star Schema','SCD Type 2'],
-    github:null,
+    title:'IoT Lakehouse Pipeline', type:'Open Source · Data Engineering', featured:true,
+    desc:'Near real-time IoT sensor ingestion into a governed medallion lakehouse. ADF Auto Loader → PySpark → Delta Lake Bronze/Silver/Gold → dbt OEE models → Synapse + Power BI.',
+    impact:['Great Expectations quality gates at every layer boundary','Terraform provisions full Azure stack reproducibly','dbt OEE mart: 64 tests, 100% column coverage'],
+    pipeline:['IoT Sensors','ADF','Databricks','dbt + Delta','Power BI'],
+    pColors:['#8B5CF6','#0078D4','#FF3621','#FF694A','#10B981'],
+    tags:['Azure Data Factory','PySpark','dbt','Delta Lake','Great Expectations','Terraform','GitHub Actions','Unity Catalog'],
+    github:'https://github.com/Neeraj600/iot-lakehouse-pipeline',
+  },
+  {
+    title:'Real-Time Fraud Detection Pipeline', type:'Open Source · Streaming', featured:true,
+    desc:'Kafka → PySpark Structured Streaming pipeline scoring transactions through a 7-rule fraud engine and routing results to Delta Lake in under 30 seconds.',
+    impact:['8,000+ transactions/second throughput','Detection latency p50: 8s, p99: 22s','Rule engine as Catalyst expressions — no slow UDFs'],
+    pipeline:['Kafka','PySpark Stream','Rule Engine','Delta Lake','Grafana'],
+    pColors:['#231F20','#FF3621','#F59E0B','#00ADD8','#F2714B'],
+    tags:['Apache Kafka','PySpark','Delta Lake','Docker','Grafana','Terraform','Spark Streaming'],
+    github:'https://github.com/Neeraj600/realtime-fraud-detection',
+  },
+  {
+    title:'dbt + Snowflake Analytics Layer', type:'Open Source · Analytics Engineering', featured:false,
+    desc:'Rebuilt ad-hoc SQL scripts into tested dbt models with staging, intermediate, and mart layers. 16 models, 104 tests, 100% column coverage. Airflow orchestration.',
+    impact:['100% schema test coverage on all mart models','Zero untested SQL in production','Slim CI: only changed models tested on PR'],
+    pipeline:['Fivetran','Snowflake RAW','dbt Staging','dbt Marts','Airflow'],
+    pColors:['#F59E0B','#29B5E8','#FF694A','#FF694A','#00A8A4'],
+    tags:['dbt','Snowflake','Apache Airflow','GitHub Actions','SQL','SCD Type 2','CI/CD'],
+    github:'https://github.com/Neeraj600/dbt-snowflake-analytics',
+  },
+  {
+    title:'Azure Car Sales Pipeline', type:'Azure · Data Engineering', featured:false,
+    desc:'End-to-end Azure pipeline ingesting car sales data through Bronze/Silver/Gold layers with Delta Live Tables, watermark-based incremental loading, and star schema in Synapse.',
+    impact:['Incremental loads via watermark stored procedure','Star schema: DimBranch, DimDealer, DimModel, FactSales','Power BI via DirectQuery on Synapse'],
+    pipeline:['GitHub CSV','Azure SQL','ADF','Databricks','Synapse'],
+    pColors:['#6B7280','#CC2927','#0078D4','#FF3621','#0078D4'],
+    tags:['Azure Data Factory','Azure Databricks','Delta Live Tables','Azure Synapse','Power BI','Star Schema'],
+    github:'https://github.com/Neeraj600/Car_sales_Data_Engineering_Project',
+  },
+  {
+    title:'Netflix Azure Data Engineering', type:'Azure · Data Engineering', featured:false,
+    desc:'Netflix dataset ingested from GitHub into ADLS Gen2 via ADF, transformed through Bronze/Silver/Gold layers using PySpark in Databricks, loaded to Synapse, visualised in Power BI.',
+    impact:['ADF ForEach for dynamic multi-file ingestion','Unity Catalog for secure ADLS access from Databricks','Synapse SQL pools for Gold layer querying'],
+    pipeline:['GitHub CSV','ADLS Gen2','ADF','Databricks','Synapse'],
+    pColors:['#E50914','#00ADD8','#0078D4','#FF3621','#0078D4'],
+    tags:['Azure Data Factory','Azure Databricks','ADLS Gen2','Delta Lake','Azure Synapse','Unity Catalog','Power BI'],
+    github:'https://github.com/Neeraj600/Netflix_Azure_Data_Engineering_Project',
   },
   {
     title:'MES Self-Serve Reporting App', type:'Full Stack · Data Engineering', featured:false,
-    desc:'ASP.NET Core MVC web app with dynamic filters, server-side pagination, and optimised PL/SQL procedures. Eliminated IT dependency for production data queries.',
+    desc:'ASP.NET Core MVC app with dynamic filters, server-side pagination, and optimised PL/SQL procedures. Eliminated IT dependency for production data queries.',
     impact:['80% reduction in query turnaround time','Zero IT tickets for data requests','Production teams fully self-serve'],
     pipeline:['Oracle MES','PL/SQL','ASP.NET','MVC','Reports'],
     pColors:['#8B5CF6','#CC2927','#0078D4','#0078D4','#10B981'],
@@ -483,7 +522,7 @@ function ThemeToggle() {
 function DownloadBtn({ compact = false }) {
   return (
     <a
-      href="Neeraj_Singh_Guleria.pdf"
+      href="Neeraj_Singh_Guleria_Resume.pdf"
       download="Neeraj_Singh_Guleria_Resume.pdf"
       className="dl-btn"
       title="Download Resume PDF"
@@ -665,7 +704,7 @@ function Hero() {
           </div>
           {/* Desc */}
           <p className="font-body text-base text-slate-400 leading-relaxed mb-8 max-w-xl anim-slide-4">
-            I build pipelines that process <span className="text-white font-medium">10M+ records a month</span> and don't break at 2am. Azure-first. Real production scale. Obsessed with <span style={{color:'#50B4FC'}}>data quality</span> and <span style={{color:'#10B981'}}>observability</span>.
+            I build pipelines that process <span className="text-white font-medium">1M+ records a month</span> and don't break at 2am. Azure-first. Real production scale. Obsessed with <span style={{color:'#50B4FC'}}>data quality</span> and <span style={{color:'#10B981'}}>observability</span>.
           </p>
           {/* Stats */}
           <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mb-8 anim-slide-4">
@@ -856,7 +895,7 @@ const PIPELINE_EXTRA = {
   SOURCE:    { icon:'🗄️', record:'Raw source systems', badge:'INPUT',   metrics:[{k:'Systems',v:'MES, ERP, Oracle'},{k:'Format',v:'Structured + Semi-structured'},{k:'Frequency',v:'Hourly trigger'}] },
   INGEST:    { icon:'🔷', record:'Azure Data Factory', badge:'INGEST',  metrics:[{k:'Pipelines',v:'20+ ADF pipelines'},{k:'Pattern',v:'Watermark + Tumbling Window'},{k:'Retry',v:'3× with backoff'}] },
   BRONZE:    { icon:'📦', record:'Raw landing zone',   badge:'RAW',     metrics:[{k:'Storage',v:'ADLS Gen2'},{k:'Format',v:'Parquet / Delta'},{k:'Retention',v:'Full audit trail'}] },
-  TRANSFORM: { icon:'⚡', record:'Databricks cluster', badge:'COMPUTE', metrics:[{k:'Engine',v:'PySpark distributed'},{k:'Quality',v:'Great Expectations gates'},{k:'Scale',v:'10M+ records/month'}] },
+  TRANSFORM: { icon:'⚡', record:'Databricks cluster', badge:'COMPUTE', metrics:[{k:'Engine',v:'PySpark distributed'},{k:'Quality',v:'Great Expectations gates'},{k:'Scale',v:'1M+ records/month'}] },
   SILVER:    { icon:'🔄', record:'dbt models',         badge:'CLEAN',   metrics:[{k:'Models',v:'Staging → Intermediate'},{k:'Tests',v:'Schema + freshness checks'},{k:'Lineage',v:'Full column lineage'}] },
   GOLD:      { icon:'⭐', record:'Aggregated metrics',  badge:'SERVE',   metrics:[{k:'Tables',v:'5 fact + 12 dim'},{k:'Schema',v:'Star schema / SCD Type 2'},{k:'Optimised',v:'Z-ordering + compaction'}] },
   SERVE:     { icon:'📊', record:'End consumers',      badge:'OUTPUT',  metrics:[{k:'Dashboards',v:'4 live Power BI'},{k:'Users',v:'Production heads + mgmt'},{k:'Refresh',v:'Daily by 6am SLA'}] },
@@ -926,7 +965,7 @@ function PipelineViz() {
           {/* Subtitle + status pill */}
           <div className="flex items-center gap-3 mb-10 flex-wrap">
             <p className="font-body text-sm" style={{color:textSecondary}}>
-              Hover to preview · Click to lock 
+              Hover to preview · Click to lock · Auto-advances every 15s
             </p>
             {locked ? (
               <span className="font-mono text-[0.58rem] tracking-widest px-2.5 py-1 rounded-full"
@@ -1235,16 +1274,30 @@ function MiniPipeline({stages, colors}) {
 
 function DEProjects() {
   const titleRef = useReveal();
+  const [showAll, setShowAll] = useState(false);
+  const visibleProjects = showAll ? DE_PROJECTS : DE_PROJECTS.slice(0, 3);
   return (
     <section id="de-projects" className="py-24 light-section-alt" style={{background:'rgba(13,18,32,0.4)'}}>
       <div className="max-w-7xl mx-auto px-6">
         <div ref={titleRef} className="reveal mb-12">
           <p className="font-mono text-xs tracking-[0.2em] uppercase mb-3 flex items-center gap-3" style={{color:'#0078D4'}}><span className="w-8 h-px bg-[#0078D4]"/>Data Engineering Projects</p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-white leading-tight">Production-grade pipelines.</h2>
-          <p className="font-body text-slate-500 mt-2 text-sm">Real systems. Real scale. Built and maintained in production.</p>
+          <div className="flex items-end justify-between gap-4 flex-wrap">
+            <div>
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-white leading-tight">Production-grade pipelines.</h2>
+              <p className="font-body text-slate-500 mt-2 text-sm">Production work · Open source projects · Azure stack</p>
+            </div>
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="font-mono text-xs tracking-wider px-4 py-2 rounded-lg transition-all duration-200 flex-shrink-0"
+              style={{border:'1px solid rgba(0,120,212,0.35)',color:'#50B4FC',background:'rgba(0,120,212,0.06)',cursor:'none'}}
+              onMouseEnter={e=>{e.currentTarget.style.background='rgba(0,120,212,0.14)';}}
+              onMouseLeave={e=>{e.currentTarget.style.background='rgba(0,120,212,0.06)';}}>
+              {showAll ? '↑ Show Featured' : `Show All ${DE_PROJECTS.length} Projects →`}
+            </button>
+          </div>
         </div>
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-          {DE_PROJECTS.map((p,i) => {
+          {visibleProjects.map((p,i) => {
             const ref = useReveal(i*90);
             return (
               <div key={i} ref={ref} className="reveal">
@@ -1460,7 +1513,7 @@ function Contact() {
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Let's talk pipelines.</h2>
           <p className="font-body text-slate-400 mb-10 leading-relaxed text-sm">
-            Open to Data Engineering roles — Azure pipelines, real-time streaming, greenfield data infrastructure..
+            Open to Data Engineering roles — Azure pipelines, real-time streaming, greenfield data infrastructure. Targeting <span className="text-white font-medium">14 LPA</span>. Notice period 30 days (negotiable).
           </p>
           <a href="mailto:neerajguleria956@gmail.com"
             className="group inline-flex items-center gap-3 px-8 py-4 rounded-xl mb-8 font-mono text-sm tracking-wider transition-all duration-300 hover:-translate-y-0.5"
@@ -1487,7 +1540,9 @@ function Contact() {
           </div>
           <div className="flex flex-wrap justify-center gap-6 font-mono text-xs text-slate-600">
             {[
-              {dot:'#10B981',text:'New Delhi, India'}
+              {dot:'#10B981',text:'New Delhi, India'},
+              {dot:'#0078D4',text:'30 days notice (negotiable)'},
+              {dot:'#F59E0B',text:'Targeting 14 LPA'},
             ].map(item=>(
               <span key={item.text} className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full" style={{background:item.dot,animation:'pulseGlow 2s ease-in-out infinite'}}/>
@@ -1508,13 +1563,16 @@ function Footer() {
     <footer className="py-8 px-6 text-center" style={{borderTop:'1px solid rgba(0,120,212,0.12)'}}>
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
         <div className="font-mono text-xs text-slate-600 tracking-widest">
-          © 2026 · Neeraj Singh Guleria · Data Engineer
+          © 2026 · Neeraj Singh Guleria · Azure Data Engineer
         </div>
         <div className="font-mono text-xs" style={{color:'rgba(0,120,212,0.4)'}}>
           neeraj<span style={{color:'rgba(245,158,11,0.5)'}}>.</span>
           <span style={{color:'rgba(0,212,255,0.4)'}}>dev</span>
         </div>
-        
+        <div className="flex items-center gap-2 font-mono text-xs text-slate-700">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" style={{animation:'pulseGlow 2s ease-in-out infinite'}}/>
+          Built with React + Tailwind
+        </div>
       </div>
     </footer>
   );
@@ -1534,7 +1592,7 @@ function FloatingDownload() {
 
   return (
     <a
-      href="Neeraj_Singh_Guleria.pdf"
+      href="Neeraj_Singh_Guleria_Resume.pdf"
       download="Neeraj_Singh_Guleria_Resume.pdf"
       title="Download Resume PDF"
       className="dl-btn"
