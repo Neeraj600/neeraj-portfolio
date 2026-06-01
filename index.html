@@ -522,8 +522,8 @@ function ThemeToggle() {
 function DownloadBtn({ compact = false }) {
   return (
     <a
-      href="Neeraj_Singh_Guleria_Resume.pdf"
-      download="Neeraj_Singh_Guleria_Resume.pdf"
+      href="Neeraj_Singh_Guleria01-06-26.pdf"
+      download="Neeraj_Singh_Guleria01-06-26.pdf"
       className="dl-btn"
       title="Download Resume PDF"
     >
@@ -835,6 +835,40 @@ function About() {
 
 // ── EXPERIENCE ───────────────────────────────────────────────────────────────
 
+function ExperienceCard({ item, i }) {
+  const ref = useReveal(i * 100);
+  return (
+    <div ref={ref} className="reveal relative">
+      <div className="absolute -left-8 top-6 w-3.5 h-3.5 rounded-full border-2 border-[#060912]"
+        style={{background:item.color,boxShadow:`0 0 12px ${item.color}90`}}/>
+      <div className="proj-card p-5 rounded-2xl backdrop-blur"
+        style={{border:`1px solid ${item.color}22`,background:'rgba(12,17,32,0.85)'}}
+        onMouseEnter={e=>{e.currentTarget.style.borderColor=`${item.color}45`;}}
+        onMouseLeave={e=>{e.currentTarget.style.borderColor=`${item.color}22`;}}>
+        <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+          <div>
+            <h3 className="font-display text-xl font-semibold text-white mb-1">{item.role}</h3>
+            <div className="flex items-center gap-2 text-sm">
+              <span className="font-medium" style={{color:item.color}}>{item.company}</span>
+              <span className="text-slate-600">·</span>
+              <span className="text-slate-500">{item.location}</span>
+            </div>
+          </div>
+          <span className="font-mono text-xs tracking-wider px-3 py-1 rounded-full" style={{color:item.color,border:`1px solid ${item.color}40`,background:`${item.color}0a`}}>{item.period}</span>
+        </div>
+        <ul className="space-y-2">
+          {item.points.map((pt,j) => (
+            <li key={j} className="flex gap-2 text-sm text-slate-400 leading-relaxed">
+              <span className="mt-1.5 text-[0.6rem] flex-shrink-0" style={{color:item.color}}>▸</span>
+              <span dangerouslySetInnerHTML={{__html:pt.replace(/<b>/g,'<strong class="text-slate-200">').replace(/<\/b>/g,'</strong>')}}/>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 function Experience() {
   const titleRef = useReveal();
   return (
@@ -847,41 +881,9 @@ function Experience() {
         <div className="relative max-w-3xl">
           <div className="timeline-line"/>
           <div className="space-y-5 pl-8">
-            {EXPERIENCE.map((item,i) => {
-              const ref = useReveal(i*100);
-              return (
-                <div key={i} ref={ref} className="reveal relative">
-                  {/* Dot */}
-                  <div className="absolute -left-8 top-6 w-3.5 h-3.5 rounded-full border-2 border-[#060912]"
-                    style={{background:item.color,boxShadow:`0 0 12px ${item.color}90`}}/>
-                  {/* Card */}
-                  <div className="proj-card p-5 rounded-2xl backdrop-blur"
-                    style={{border:`1px solid ${item.color}22`,background:'rgba(12,17,32,0.85)'}}
-                    onMouseEnter={e=>{e.currentTarget.style.borderColor=`${item.color}45`;}}
-                    onMouseLeave={e=>{e.currentTarget.style.borderColor=`${item.color}22`;}}>
-                    <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-                      <div>
-                        <h3 className="font-display text-xl font-semibold text-white mb-1">{item.role}</h3>
-                        <div className="flex items-center gap-2 text-sm">
-                          <span className="font-medium" style={{color:item.color}}>{item.company}</span>
-                          <span className="text-slate-600">·</span>
-                          <span className="text-slate-500">{item.location}</span>
-                        </div>
-                      </div>
-                      <span className="font-mono text-xs tracking-wider px-3 py-1 rounded-full" style={{color:item.color,border:`1px solid ${item.color}40`,background:`${item.color}0a`}}>{item.period}</span>
-                    </div>
-                    <ul className="space-y-2">
-                      {item.points.map((pt,j) => (
-                        <li key={j} className="flex gap-2 text-sm text-slate-400 leading-relaxed">
-                          <span className="mt-1.5 text-[0.6rem] flex-shrink-0" style={{color:item.color}}>▸</span>
-                          <span dangerouslySetInnerHTML={{__html:pt.replace(/<b>/g,'<strong class="text-slate-200">').replace(/<\/b>/g,'</strong>')}}/>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              );
-            })}
+            {EXPERIENCE.map((item,i) => (
+              <ExperienceCard key={i} item={item} i={i} />
+            ))}
           </div>
         </div>
       </div>
@@ -1272,6 +1274,52 @@ function MiniPipeline({stages, colors}) {
 
 // ── DE PROJECTS ──────────────────────────────────────────────────────────────
 
+// ── DE PROJECT CARD (own component so hooks are stable) ──────────────────────
+function DEProjectCard({ p, i }) {
+  const ref = useReveal(i * 90);
+  return (
+    <div ref={ref} className="reveal">
+      <div className="proj-card relative rounded-2xl p-6 h-full backdrop-blur overflow-hidden"
+        style={{border:'1px solid rgba(0,120,212,0.15)',background:'rgba(12,17,32,0.88)'}}
+        onMouseEnter={e=>{e.currentTarget.style.borderColor='rgba(0,120,212,0.38)';}}
+        onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(0,120,212,0.15)';}}>
+        <div className="absolute inset-x-0 top-0 h-px opacity-0 transition-opacity duration-300"
+          style={{background:'linear-gradient(90deg,transparent,rgba(0,120,212,0.6),transparent)'}}
+          ref={el=>{ if(el){ el.closest('.proj-card')?.addEventListener('mouseenter',()=>el.style.opacity='1'); el.closest('.proj-card')?.addEventListener('mouseleave',()=>el.style.opacity='0'); }}}/>
+        {p.featured && (
+          <div className="absolute top-4 right-4 font-mono text-[0.58rem] tracking-widest px-2 py-0.5 rounded-full"
+            style={{background:'rgba(0,120,212,0.15)',border:'1px solid rgba(0,120,212,0.3)',color:'#50B4FC'}}>
+            FEATURED
+          </div>
+        )}
+        <div className="font-mono text-[0.62rem] tracking-widest uppercase mb-2 flex items-center gap-2" style={{color:'#0078D4'}}>
+          <div className="flex gap-0.5"><span className="w-5 h-0.5 bg-[#0078D4] rounded"/><span className="w-3 h-0.5 bg-[#0078D4] rounded opacity-40"/></div>
+          {p.type}
+        </div>
+        <h3 className="font-display text-xl font-bold text-white mb-3 leading-tight">{p.title}</h3>
+        <MiniPipeline stages={p.pipeline} colors={p.pColors}/>
+        <p className="font-body text-sm text-slate-400 leading-relaxed mb-4">{p.desc}</p>
+        <div className="space-y-1.5 mb-4">
+          {p.impact.map((imp,j) => (
+            <div key={j} className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs"
+              style={{background:'rgba(0,120,212,0.05)',border:'1px solid rgba(0,120,212,0.12)'}}>
+              <span style={{color:'#10B981'}}>✓</span>
+              <span className="font-body text-slate-300">{imp}</span>
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {p.tags.map(t=><ToolTag key={t} name={t}/>)}
+        </div>
+        {p.github
+          ? <a href={p.github} target="_blank" rel="noreferrer" className="font-mono text-xs pb-0.5 transition-colors" style={{color:'#0078D4',borderBottom:'1px solid rgba(0,120,212,0.35)'}} onMouseEnter={e=>{e.target.style.color='#00D4FF';e.target.style.borderColor='#00D4FF';}} onMouseLeave={e=>{e.target.style.color='#0078D4';e.target.style.borderColor='rgba(0,120,212,0.35)';}}>View on GitHub ↗</a>
+          : <span className="font-mono text-xs text-slate-600">Production project · Private repo</span>
+        }
+      </div>
+    </div>
+  );
+}
+
 function DEProjects() {
   const titleRef = useReveal();
   const [showAll, setShowAll] = useState(false);
@@ -1297,62 +1345,49 @@ function DEProjects() {
           </div>
         </div>
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-          {visibleProjects.map((p,i) => {
-            const ref = useReveal(i*90);
-            return (
-              <div key={i} ref={ref} className="reveal">
-                <div className="proj-card relative rounded-2xl p-6 h-full backdrop-blur overflow-hidden"
-                  style={{border:'1px solid rgba(0,120,212,0.15)',background:'rgba(12,17,32,0.88)'}}
-                  onMouseEnter={e=>{e.currentTarget.style.borderColor='rgba(0,120,212,0.38)';}}
-                  onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(0,120,212,0.15)';}}>
-                  {/* Top glow */}
-                  <div className="absolute inset-x-0 top-0 h-px opacity-0 transition-opacity duration-300"
-                    style={{background:'linear-gradient(90deg,transparent,rgba(0,120,212,0.6),transparent)'}}
-                    ref={el=>{ if(el){ el.closest('.proj-card')?.addEventListener('mouseenter',()=>el.style.opacity='1'); el.closest('.proj-card')?.addEventListener('mouseleave',()=>el.style.opacity='0'); }}}/>
-                  {/* Featured badge */}
-                  {p.featured && (
-                    <div className="absolute top-4 right-4 font-mono text-[0.58rem] tracking-widest px-2 py-0.5 rounded-full"
-                      style={{background:'rgba(0,120,212,0.15)',border:'1px solid rgba(0,120,212,0.3)',color:'#50B4FC'}}>
-                      FEATURED
-                    </div>
-                  )}
-                  {/* Type */}
-                  <div className="font-mono text-[0.62rem] tracking-widest uppercase mb-2 flex items-center gap-2" style={{color:'#0078D4'}}>
-                    <div className="flex gap-0.5"><span className="w-5 h-0.5 bg-[#0078D4] rounded"/><span className="w-3 h-0.5 bg-[#0078D4] rounded opacity-40"/></div>
-                    {p.type}
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-white mb-3 leading-tight">{p.title}</h3>
-                  <MiniPipeline stages={p.pipeline} colors={p.pColors}/>
-                  <p className="font-body text-sm text-slate-400 leading-relaxed mb-4">{p.desc}</p>
-                  {/* Impact */}
-                  <div className="space-y-1.5 mb-4">
-                    {p.impact.map((imp,j) => (
-                      <div key={j} className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs"
-                        style={{background:'rgba(0,120,212,0.05)',border:'1px solid rgba(0,120,212,0.12)'}}>
-                        <span style={{color:'#10B981'}}>✓</span>
-                        <span className="font-body text-slate-300">{imp}</span>
-                      </div>
-                    ))}
-                  </div>
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {p.tags.map(t=><ToolTag key={t} name={t}/>)}
-                  </div>
-                  {p.github
-                    ? <a href={p.github} target="_blank" rel="noreferrer" className="font-mono text-xs pb-0.5 transition-colors" style={{color:'#0078D4',borderBottom:'1px solid rgba(0,120,212,0.35)'}} onMouseEnter={e=>{e.target.style.color='#00D4FF';e.target.style.borderColor='#00D4FF';}} onMouseLeave={e=>{e.target.style.color='#0078D4';e.target.style.borderColor='rgba(0,120,212,0.35)';}}>View on GitHub ↗</a>
-                    : <span className="font-mono text-xs text-slate-600">Production project · Private repo</span>
-                  }
-                </div>
-              </div>
-            );
-          })}
+          {visibleProjects.map((p,i) => (
+            <DEProjectCard key={p.title} p={p} i={i} />
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
+
+
 // ── DA PROJECTS ──────────────────────────────────────────────────────────────
+
+function DAProjectCard({ p, i }) {
+  const ref = useReveal(i * 75);
+  return (
+    <div ref={ref} className="reveal">
+      <div className="proj-card h-full rounded-2xl p-5 flex flex-col backdrop-blur"
+        style={{border:'1px solid rgba(245,158,11,0.12)',background:'rgba(12,17,32,0.85)'}}
+        onMouseEnter={e=>{e.currentTarget.style.borderColor='rgba(245,158,11,0.32)';}}
+        onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(245,158,11,0.12)';}}>
+        <div className="h-px mb-4 opacity-50" style={{background:'linear-gradient(to right,#F59E0B,transparent)'}}/>
+        <div className="font-mono text-[0.6rem] tracking-widest uppercase mb-2" style={{color:'#F59E0B'}}>Analysis</div>
+        <h3 className="font-display text-base font-semibold text-white mb-2 leading-snug flex-grow">{p.title}</h3>
+        <p className="font-body text-xs text-slate-500 leading-relaxed mb-4">{p.desc}</p>
+        <div className="flex flex-wrap gap-1 mb-4">
+          {p.tags.map(t=>(
+            <span key={t} className="font-mono text-[0.58rem] px-2 py-0.5 rounded" style={{background:'rgba(245,158,11,0.07)',border:'1px solid rgba(245,158,11,0.18)',color:'#F59E0B'}}>
+              {t}
+            </span>
+          ))}
+        </div>
+        <a href={p.github} target="_blank" rel="noreferrer"
+          className="font-mono text-xs pb-0.5 w-fit mt-auto transition-colors"
+          style={{color:'#F59E0B',borderBottom:'1px solid rgba(245,158,11,0.3)'}}
+          onMouseEnter={e=>{e.target.style.color='#FCD34D';e.target.style.borderColor='#F59E0B';}}
+          onMouseLeave={e=>{e.target.style.color='#F59E0B';e.target.style.borderColor='rgba(245,158,11,0.3)';}}>
+          View on GitHub ↗
+        </a>
+      </div>
+    </div>
+  );
+}
 
 function DAProjects() {
   const titleRef = useReveal();
@@ -1365,36 +1400,9 @@ function DAProjects() {
           <p className="font-body text-slate-500 mt-2 text-sm">Python, SQL, EDA. Open source on GitHub.</p>
         </div>
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          {DA_PROJECTS.map((p,i) => {
-            const ref = useReveal(i*75);
-            return (
-              <div key={i} ref={ref} className="reveal">
-                <div className="proj-card h-full rounded-2xl p-5 flex flex-col backdrop-blur"
-                  style={{border:'1px solid rgba(245,158,11,0.12)',background:'rgba(12,17,32,0.85)'}}
-                  onMouseEnter={e=>{e.currentTarget.style.borderColor='rgba(245,158,11,0.32)';}}
-                  onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(245,158,11,0.12)';}}>
-                  <div className="h-px mb-4 opacity-50" style={{background:'linear-gradient(to right,#F59E0B,transparent)'}}/>
-                  <div className="font-mono text-[0.6rem] tracking-widest uppercase mb-2" style={{color:'#F59E0B'}}>Analysis</div>
-                  <h3 className="font-display text-base font-semibold text-white mb-2 leading-snug flex-grow">{p.title}</h3>
-                  <p className="font-body text-xs text-slate-500 leading-relaxed mb-4">{p.desc}</p>
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {p.tags.map(t=>(
-                      <span key={t} className="font-mono text-[0.58rem] px-2 py-0.5 rounded" style={{background:'rgba(245,158,11,0.07)',border:'1px solid rgba(245,158,11,0.18)',color:'#F59E0B'}}>
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <a href={p.github} target="_blank" rel="noreferrer"
-                    className="font-mono text-xs pb-0.5 w-fit mt-auto transition-colors"
-                    style={{color:'#F59E0B',borderBottom:'1px solid rgba(245,158,11,0.3)'}}
-                    onMouseEnter={e=>{e.target.style.color='#FCD34D';e.target.style.borderColor='#F59E0B';}}
-                    onMouseLeave={e=>{e.target.style.color='#F59E0B';e.target.style.borderColor='rgba(245,158,11,0.3)';}}>
-                    View on GitHub ↗
-                  </a>
-                </div>
-              </div>
-            );
-          })}
+          {DA_PROJECTS.map((p,i) => (
+            <DAProjectCard key={i} p={p} i={i} />
+          ))}
         </div>
       </div>
     </section>
@@ -1402,6 +1410,34 @@ function DAProjects() {
 }
 
 // ── SKILLS ───────────────────────────────────────────────────────────────────
+
+function SkillCard({ g, gi }) {
+  const ref = useReveal(gi * 55);
+  return (
+    <div ref={ref} className="reveal">
+      <div className="proj-card h-full rounded-2xl p-5 backdrop-blur"
+        style={{border:`1px solid ${g.color}1e`,background:'rgba(12,17,32,0.85)'}}
+        onMouseEnter={e=>{e.currentTarget.style.borderColor=`${g.color}45`;}}
+        onMouseLeave={e=>{e.currentTarget.style.borderColor=`${g.color}1e`;}}>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-xl">{g.icon}</span>
+          <span className="font-mono text-[0.62rem] tracking-widest uppercase" style={{color:g.color}}>{g.cat}</span>
+        </div>
+        <div className="h-px mb-3" style={{background:`linear-gradient(to right,${g.color},transparent)`}}/>
+        <div className="flex flex-wrap gap-1.5">
+          {g.skills.map((sk,si) => (
+            <span key={si} className="skill-pill font-body text-xs px-2.5 py-1 rounded-lg cursor-default"
+              style={{background:`${g.color}0e`,border:`1px solid ${g.color}22`,color:si<3?'#E2E8F0':'#94A3B8'}}
+              onMouseEnter={e=>{e.target.style.color=g.color;e.target.style.borderColor=`${g.color}55`;e.target.style.background=`${g.color}18`;}}
+              onMouseLeave={e=>{e.target.style.color=si<3?'#E2E8F0':'#94A3B8';e.target.style.borderColor=`${g.color}22`;e.target.style.background=`${g.color}0e`;}}>
+              {sk}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Skills() {
   const titleRef = useReveal();
@@ -1413,33 +1449,9 @@ function Skills() {
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white">The full stack.</h2>
         </div>
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          {SKILL_GROUPS.map((g,gi) => {
-            const ref = useReveal(gi*55);
-            return (
-              <div key={gi} ref={ref} className="reveal">
-                <div className="proj-card h-full rounded-2xl p-5 backdrop-blur"
-                  style={{border:`1px solid ${g.color}1e`,background:'rgba(12,17,32,0.85)'}}
-                  onMouseEnter={e=>{e.currentTarget.style.borderColor=`${g.color}45`;}}
-                  onMouseLeave={e=>{e.currentTarget.style.borderColor=`${g.color}1e`;}}>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-xl">{g.icon}</span>
-                    <span className="font-mono text-[0.62rem] tracking-widest uppercase" style={{color:g.color}}>{g.cat}</span>
-                  </div>
-                  <div className="h-px mb-3" style={{background:`linear-gradient(to right,${g.color},transparent)`}}/>
-                  <div className="flex flex-wrap gap-1.5">
-                    {g.skills.map((sk,si) => (
-                      <span key={si} className="skill-pill font-body text-xs px-2.5 py-1 rounded-lg cursor-default"
-                        style={{background:`${g.color}0e`,border:`1px solid ${g.color}22`,color:si<3?'#E2E8F0':'#94A3B8'}}
-                        onMouseEnter={e=>{e.target.style.color=g.color;e.target.style.borderColor=`${g.color}55`;e.target.style.background=`${g.color}18`;}}
-                        onMouseLeave={e=>{e.target.style.color=si<3?'#E2E8F0':'#94A3B8';e.target.style.borderColor=`${g.color}22`;e.target.style.background=`${g.color}0e`;}}>
-                        {sk}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {SKILL_GROUPS.map((g,gi) => (
+            <SkillCard key={gi} g={g} gi={gi} />
+          ))}
         </div>
       </div>
     </section>
@@ -1447,6 +1459,43 @@ function Skills() {
 }
 
 // ── CERTIFICATIONS ───────────────────────────────────────────────────────────
+
+function CertCard({ c, i }) {
+  const ref = useReveal(i * 80);
+  const inProg = c.status === 'in-progress';
+  return (
+    <div ref={ref} className="reveal">
+      <div className="proj-card h-full rounded-2xl p-5 backdrop-blur"
+        style={{border:`1px solid ${c.color}${inProg?'35':'22'}`,background:'rgba(12,17,32,0.85)'}}
+        onMouseEnter={e=>{e.currentTarget.style.borderColor=`${c.color}55`;}}
+        onMouseLeave={e=>{e.currentTarget.style.borderColor=`${c.color}${inProg?'35':'22'}`;}}>
+        <div className="flex items-start justify-between mb-4">
+          <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
+            style={{background:`${c.color}18`,border:`1px solid ${c.color}35`}}>
+            {c.icon}
+          </div>
+          <span className={`font-mono text-[0.56rem] tracking-widest px-2 py-0.5 rounded-full ${inProg?'':'opacity-80'}`}
+            style={{color:c.color,border:`1px solid ${c.color}40`,background:`${c.color}0a`}}>
+            {inProg?'IN PROGRESS':'COMPLETED'}
+          </span>
+        </div>
+        <h3 className="font-body text-sm font-medium text-slate-200 leading-snug mb-3">{c.title}</h3>
+        <div className="flex items-center justify-between">
+          <span className="font-mono text-[0.62rem] tracking-wider" style={{color:c.color}}>{c.issuer}</span>
+          <span className="font-mono text-[0.6rem] text-slate-600">{c.year}</span>
+        </div>
+        {inProg && (
+          <div className="mt-3">
+            <div className="h-0.5 rounded-full overflow-hidden" style={{background:'rgba(255,255,255,0.06)'}}>
+              <div className="h-full rounded-full w-[45%]" style={{background:`linear-gradient(to right,${c.color}80,${c.color})`}}/>
+            </div>
+            <div className="font-mono text-[0.54rem] text-slate-600 mt-1">In progress · 2026</div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 function Certifications() {
   const titleRef = useReveal();
@@ -1458,42 +1507,9 @@ function Certifications() {
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white">Credentials.</h2>
         </div>
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          {CERTS.map((c,i) => {
-            const ref = useReveal(i*80);
-            const inProg = c.status==='in-progress';
-            return (
-              <div key={i} ref={ref} className="reveal">
-                <div className="proj-card h-full rounded-2xl p-5 backdrop-blur"
-                  style={{border:`1px solid ${c.color}${inProg?'35':'22'}`,background:'rgba(12,17,32,0.85)'}}
-                  onMouseEnter={e=>{e.currentTarget.style.borderColor=`${c.color}55`;}}
-                  onMouseLeave={e=>{e.currentTarget.style.borderColor=`${c.color}${inProg?'35':'22'}`;}}>
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-                      style={{background:`${c.color}18`,border:`1px solid ${c.color}35`}}>
-                      {c.icon}
-                    </div>
-                    <span className={`font-mono text-[0.56rem] tracking-widest px-2 py-0.5 rounded-full ${inProg?'':'opacity-80'}`}
-                      style={{color:c.color,border:`1px solid ${c.color}40`,background:`${c.color}0a`}}>
-                      {inProg?'IN PROGRESS':'COMPLETED'}
-                    </span>
-                  </div>
-                  <h3 className="font-body text-sm font-medium text-slate-200 leading-snug mb-3">{c.title}</h3>
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-[0.62rem] tracking-wider" style={{color:c.color}}>{c.issuer}</span>
-                    <span className="font-mono text-[0.6rem] text-slate-600">{c.year}</span>
-                  </div>
-                  {inProg && (
-                    <div className="mt-3">
-                      <div className="h-0.5 rounded-full overflow-hidden" style={{background:'rgba(255,255,255,0.06)'}}>
-                        <div className="h-full rounded-full w-[45%]" style={{background:`linear-gradient(to right,${c.color}80,${c.color})`}}/>
-                      </div>
-                      <div className="font-mono text-[0.54rem] text-slate-600 mt-1">In progress · 2026</div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+          {CERTS.map((c,i) => (
+            <CertCard key={i} c={c} i={i} />
+          ))}
         </div>
       </div>
     </section>
@@ -1592,8 +1608,8 @@ function FloatingDownload() {
 
   return (
     <a
-      href="Neeraj_Singh_Guleria_Resume.pdf"
-      download="Neeraj_Singh_Guleria_Resume.pdf"
+      href="Neeraj_Singh_Guleria01-06-26.pdf"
+      download="Neeraj_Singh_Guleria01-06-26.pdf"
       title="Download Resume PDF"
       className="dl-btn"
       style={{
