@@ -929,7 +929,7 @@ function PipelineViz() {
           return PIPELINE_STAGES[(idx + 1) % PIPELINE_STAGES.length].label;
         });
       }
-    }, 1000);
+    }, 5000);
     return () => { clearInterval(timerRef.current); clearTimeout(unlockRef.current); };
   }, []);
 
@@ -967,7 +967,7 @@ function PipelineViz() {
           {/* Subtitle + status pill */}
           <div className="flex items-center gap-3 mb-10 flex-wrap">
             <p className="font-body text-sm" style={{color:textSecondary}}>
-              Hover to preview · Click to lock · Auto-advances every 15s
+              Hover to preview · Click to lock 
             </p>
             {locked ? (
               <span className="font-mono text-[0.58rem] tracking-widest px-2.5 py-1 rounded-full"
