@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- v2.1 pipeline-redesign -->
+<!-- v2.2 resume-sync -->
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Neeraj Singh Guleria — Azure Data Engineer</title>
-<meta name="description" content="Azure Data Engineer · PySpark · dbt · Databricks · Snowflake · Building pipelines that actually work in production."/>
+<meta name="description" content="Azure Data Engineer · PySpark · dbt · Databricks · Snowflake · Kafka · Building pipelines that actually work in production."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
@@ -33,34 +33,26 @@ body{background:#060912;color:#E2E8F0;font-family:'DM Sans',sans-serif;overflow-
 ::-webkit-scrollbar-track{background:#060912;}
 ::-webkit-scrollbar-thumb{background:#0078D4;border-radius:2px;}
 
-/* Cursor */
 #cursor-dot{position:fixed;width:8px;height:8px;background:#00D4FF;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;}
 #cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(0,212,255,0.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
 
-/* Scrollbar */
 .flow-line{stroke-dasharray:8 5;animation:flow 3s linear infinite;}
 .flow-slow{stroke-dasharray:8 5;animation:flow 5s linear infinite;}
 .flow-amber{stroke-dasharray:8 5;animation:flow 4s linear infinite;}
 
-/* Glass */
 .glass{background:rgba(12,17,32,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);}
 
-/* Gradients */
 .text-grad-azure{background:linear-gradient(135deg,#50B4FC,#0078D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .text-grad-neon{background:linear-gradient(135deg,#00D4FF,#0078D4,#50B4FC);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .text-grad-amber{background:linear-gradient(135deg,#FCD34D,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 
-/* Grid bg */
 .bg-grid{background-image:linear-gradient(rgba(0,120,212,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,120,212,0.04) 1px,transparent 1px);background-size:40px 40px;}
 
-/* Reveal */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
-/* Tool badge */
 .tool-badge:hover{transform:translateY(-2px) scale(1.04);transition:all .18s ease;}
 
-/* Animations */
 @keyframes flow{to{stroke-dashoffset:-200;}}
 @keyframes pulseGlow{0%,100%{opacity:.5;transform:scale(1);}50%{opacity:1;transform:scale(1.4);}}
 @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
@@ -69,8 +61,6 @@ body{background:#060912;color:#E2E8F0;font-family:'DM Sans',sans-serif;overflow-
 @keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 @keyframes nodePulse{0%,100%{opacity:.6;}50%{opacity:1;}}
 @keyframes scanLine{0%{top:-5%;}100%{top:105%;}}
-@keyframes dataFlow{0%{transform:translateX(-8px);opacity:0;}50%{opacity:1;}100%{transform:translateX(8px);opacity:0;}}
-@keyframes borderPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,120,212,0);} 50%{box-shadow:0 0 0 4px rgba(0,120,212,0.15);}}
 
 .anim-slide-1{animation:slideUp .7s .05s ease both;}
 .anim-slide-2{animation:slideUp .7s .15s ease both;}
@@ -78,39 +68,32 @@ body{background:#060912;color:#E2E8F0;font-family:'DM Sans',sans-serif;overflow-
 .anim-slide-4{animation:slideUp .7s .35s ease both;}
 .anim-slide-5{animation:slideUp .7s .45s ease both;}
 .anim-fade{animation:fadeIn .8s .1s ease both;}
-.anim-ticker{animation:ticker 26s linear infinite;}
+.anim-ticker{animation:ticker 30s linear infinite;}
 .anim-float{animation:float 6s ease-in-out infinite;}
 .anim-float2{animation:float 7s 1.5s ease-in-out infinite;}
 .anim-pulse{animation:pulseGlow 2s ease-in-out infinite;}
 
-/* Nav link underline */
 .nav-link::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:#0078D4;transition:width .3s;}
 .nav-link:hover::after,.nav-link.active::after{width:100%;}
 
-/* Timeline */
 .timeline-line{position:absolute;left:6px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,#0078D4,rgba(0,120,212,0.15),transparent);}
 
-/* Card hover */
 .proj-card{transition:transform .3s,box-shadow .3s,border-color .3s;}
 .proj-card:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,120,212,0.18);}
 
-/* Skill pill hover */
 .skill-pill{transition:all .2s;}
 .skill-pill:hover{transform:translateY(-2px);}
 
-/* ── THEME TRANSITION ── */
 *, *::before, *::after {
   transition-property: background-color, border-color, color, fill, stroke, box-shadow;
   transition-duration: 0.25s;
   transition-timing-function: ease;
 }
-/* Override transition for animations that must stay fast */
 .flow-line, .flow-slow, .flow-amber, .reveal, .proj-card,
 .tool-badge, .skill-pill, #cursor-dot, #cursor-ring {
   transition-property: opacity, transform, border-color, box-shadow !important;
 }
 
-/* ── LIGHT MODE ── */
 body.light {
   background: #F0F4FA;
   color: #1A2540;
@@ -122,11 +105,9 @@ body.light .glass {
 body.light ::-webkit-scrollbar-track { background: #F0F4FA; }
 body.light ::-webkit-scrollbar-thumb { background: #0078D4; }
 
-/* Light mode section alternates */
 body.light .light-section-alt { background: rgba(255,255,255,0.6) !important; }
 body.light .light-section-base { background: #F0F4FA !important; }
 
-/* Light mode text */
 body.light .text-slate-400 { color: #3D5080 !important; }
 body.light .text-slate-500 { color: #5A6E94 !important; }
 body.light .text-slate-600 { color: #7A8BAA !important; }
@@ -135,7 +116,6 @@ body.light .text-white     { color: #0D1B38 !important; }
 body.light .text-slate-200 { color: #1A2540 !important; }
 body.light .text-slate-300 { color: #2A3A60 !important; }
 
-/* Light mode cards */
 body.light .proj-card {
   background: rgba(255,255,255,0.95) !important;
   box-shadow: 0 2px 16px rgba(0,120,212,0.08) !important;
@@ -144,7 +124,6 @@ body.light .proj-card:hover {
   box-shadow: 0 10px 36px rgba(0,120,212,0.16) !important;
 }
 
-/* Light mode gradients */
 body.light .text-grad-neon {
   background: linear-gradient(135deg, #0050A0, #0078D4, #50B4FC);
   -webkit-background-clip: text;
@@ -158,7 +137,6 @@ body.light .text-grad-azure {
   background-clip: text;
 }
 
-/* Light mode bg grid */
 body.light .bg-grid {
   background-image:
     linear-gradient(rgba(0,120,212,0.07) 1px, transparent 1px),
@@ -166,24 +144,16 @@ body.light .bg-grid {
   background-size: 40px 40px;
 }
 
-/* Light mode timeline line */
 body.light .timeline-line {
   background: linear-gradient(to bottom, #0078D4, rgba(0,120,212,0.25), transparent);
 }
 
-/* Light mode tool badges */
-body.light .tool-badge {
-  filter: saturate(0.9) brightness(0.95);
-}
-
-/* Light mode ticker border */
 body.light .ticker-wrapper {
   border-top-color: rgba(0,120,212,0.18) !important;
   border-bottom-color: rgba(0,120,212,0.18) !important;
   background: rgba(0,120,212,0.04) !important;
 }
 
-/* Theme toggle button */
 .theme-toggle {
   position: relative;
   width: 48px;
@@ -213,7 +183,6 @@ body.light .ticker-wrapper {
 .theme-toggle-thumb.light-thumb { transform: translateX(22px); background: #F59E0B; }
 body.light .theme-toggle { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.4); }
 
-/* Download resume button */
 .dl-btn {
   display: inline-flex;
   align-items: center;
@@ -239,7 +208,6 @@ body.light .theme-toggle { background: rgba(245,158,11,0.12); border-color: rgba
 }
 .dl-btn svg { flex-shrink: 0; }
 
-/* Light mode download btn */
 body.light .dl-btn { color: #0D8F65; border-color: rgba(13,143,101,0.4); background: rgba(13,143,101,0.07); }
 body.light .dl-btn:hover { background: rgba(13,143,101,0.14); }
 </style>
@@ -253,7 +221,6 @@ body.light .dl-btn:hover { background: rgba(13,143,101,0.14); }
 <script type="text/babel">
 const { useState, useEffect, useRef, useCallback, createContext, useContext } = React;
 
-// ── THEME CONTEXT ─────────────────────────────────────────────────────────────
 const ThemeCtx = createContext({ dark: true, toggle: () => {} });
 const useTheme = () => useContext(ThemeCtx);
 
@@ -270,49 +237,58 @@ const TOOLS = {
   'Delta Lake':          {bg:'rgba(0,173,216,0.12)',   border:'rgba(0,173,216,0.38)',   text:'#4DC8E8', icon:'△'},
   'Snowflake':           {bg:'rgba(41,181,232,0.12)',  border:'rgba(41,181,232,0.38)',  text:'#7DD4F5', icon:'❄️'},
   'Apache Kafka':        {bg:'rgba(130,130,130,0.1)',  border:'rgba(130,130,130,0.3)',  text:'#AAAAAA', icon:'📨'},
+  'Kafka':               {bg:'rgba(130,130,130,0.1)',  border:'rgba(130,130,130,0.3)',  text:'#AAAAAA', icon:'📨'},
   'Python':              {bg:'rgba(55,118,171,0.15)',  border:'rgba(55,118,171,0.38)',  text:'#FFD43B', icon:'🐍'},
   'SQL':                 {bg:'rgba(204,41,39,0.12)',   border:'rgba(204,41,39,0.38)',   text:'#FF7A78', icon:'🗃️'},
   'Terraform':           {bg:'rgba(123,66,188,0.14)',  border:'rgba(123,66,188,0.4)',   text:'#A07CC5', icon:'🔧'},
   'Power BI':            {bg:'rgba(242,200,17,0.1)',   border:'rgba(242,200,17,0.35)',  text:'#F7DC61', icon:'📊'},
   'Docker':              {bg:'rgba(36,150,237,0.12)',  border:'rgba(36,150,237,0.38)',  text:'#6BB8F5', icon:'🐳'},
   'GitHub Actions':      {bg:'rgba(60,70,80,0.2)',     border:'rgba(110,120,130,0.3)', text:'#CCCCCC', icon:'⚙️'},
-  'Apache Iceberg':      {bg:'rgba(100,160,220,0.12)', border:'rgba(100,160,220,0.32)' ,text:'#90C8F0', icon:'🧊'},
-  'Great Expectations':  {bg:'rgba(16,185,129,0.12)',  border:'rgba(16,185,129,0.38)',  text:'#6EE7B7', icon:'✅'},
-  'Apache Airflow':      {bg:'rgba(0,168,164,0.12)',   border:'rgba(0,168,164,0.38)',   text:'#4DD5D1', icon:'🌪️'},
-  'Unity Catalog':       {bg:'rgba(255,54,33,0.1)',    border:'rgba(255,54,33,0.3)',    text:'#FF8070', icon:'📋'},
-  'Azure Monitor':       {bg:'rgba(0,120,212,0.1)',    border:'rgba(0,120,212,0.3)',    text:'#50B4FC', icon:'📈'},
-  'Azure DevOps':        {bg:'rgba(0,120,212,0.1)',    border:'rgba(0,120,212,0.3)',    text:'#50B4FC', icon:'🔵'},
-  'Grafana':             {bg:'rgba(242,113,43,0.12)',  border:'rgba(242,113,43,0.35)',  text:'#F7894A', icon:'📉'},
-  'Star Schema':         {bg:'rgba(245,158,11,0.1)',   border:'rgba(245,158,11,0.3)',   text:'#FCD34D', icon:'⭐'},
-  'SCD Type 2':          {bg:'rgba(139,92,246,0.1)',   border:'rgba(139,92,246,0.3)',   text:'#C4B5FD', icon:'🔀'},
-  'Delta Live Tables':  {bg:'rgba(0,173,216,0.12)', border:'rgba(0,173,216,0.38)', text:'#4DC8E8', icon:'△'},
-  'Azure SQL':           {bg:'rgba(0,120,212,0.12)', border:'rgba(0,120,212,0.38)', text:'#50B4FC', icon:'🔷'},
-  'Spark Streaming':     {bg:'rgba(226,90,28,0.12)', border:'rgba(226,90,28,0.38)', text:'#F0845C', icon:'⚡'},
-  'Medallion Architecture':{bg:'rgba(0,120,212,0.1)', border:'rgba(0,120,212,0.3)',    text:'#93C5FD', icon:'🏗️'},
+  'Apache Iceberg':      {bg:'rgba(100,160,220,0.12)', border:'rgba(100,160,220,0.32)',text:'#90C8F0', icon:'🧊'},
+  'Great Expectations':  {bg:'rgba(16,185,129,0.12)',  border:'rgba(16,185,129,0.38)', text:'#6EE7B7', icon:'✅'},
+  'Apache Airflow':      {bg:'rgba(0,168,164,0.12)',   border:'rgba(0,168,164,0.38)',  text:'#4DD5D1', icon:'🌪️'},
+  'Unity Catalog':       {bg:'rgba(255,54,33,0.1)',    border:'rgba(255,54,33,0.3)',   text:'#FF8070', icon:'📋'},
+  'Azure Monitor':       {bg:'rgba(0,120,212,0.1)',    border:'rgba(0,120,212,0.3)',   text:'#50B4FC', icon:'📈'},
+  'Azure DevOps':        {bg:'rgba(0,120,212,0.1)',    border:'rgba(0,120,212,0.3)',   text:'#50B4FC', icon:'🔵'},
+  'Grafana':             {bg:'rgba(242,113,43,0.12)',  border:'rgba(242,113,43,0.35)', text:'#F7894A', icon:'📉'},
+  'Star Schema':         {bg:'rgba(245,158,11,0.1)',   border:'rgba(245,158,11,0.3)',  text:'#FCD34D', icon:'⭐'},
+  'SCD Type 2':          {bg:'rgba(139,92,246,0.1)',   border:'rgba(139,92,246,0.3)',  text:'#C4B5FD', icon:'🔀'},
+  'Delta Live Tables':   {bg:'rgba(0,173,216,0.12)',   border:'rgba(0,173,216,0.38)', text:'#4DC8E8', icon:'△'},
+  'Azure SQL':           {bg:'rgba(0,120,212,0.12)',   border:'rgba(0,120,212,0.38)', text:'#50B4FC', icon:'🔷'},
+  'Spark Streaming':     {bg:'rgba(226,90,28,0.12)',   border:'rgba(226,90,28,0.38)', text:'#F0845C', icon:'⚡'},
+  'Spark Structured Streaming': {bg:'rgba(226,90,28,0.12)', border:'rgba(226,90,28,0.38)', text:'#F0845C', icon:'⚡'},
+  'Medallion Architecture':{bg:'rgba(0,120,212,0.1)', border:'rgba(0,120,212,0.3)',   text:'#93C5FD', icon:'🏗️'},
+  'RBAC':                {bg:'rgba(16,185,129,0.1)',   border:'rgba(16,185,129,0.3)',  text:'#6EE7B7', icon:'🛡️'},
+  'Azure Purview':       {bg:'rgba(0,120,212,0.1)',    border:'rgba(0,120,212,0.3)',   text:'#50B4FC', icon:'🔍'},
+  'PL/SQL':              {bg:'rgba(204,41,39,0.12)',   border:'rgba(204,41,39,0.38)',  text:'#FF7A78', icon:'🗃️'},
+  'ASP.NET Core':        {bg:'rgba(82,130,255,0.12)',  border:'rgba(82,130,255,0.35)', text:'#A5B4FC', icon:'🔵'},
+  'MVC':                 {bg:'rgba(82,130,255,0.1)',   border:'rgba(82,130,255,0.28)', text:'#A5B4FC', icon:'🔵'},
+  'Pagination':          {bg:'rgba(100,116,139,0.1)',  border:'rgba(100,116,139,0.25)',text:'#94A3B8', icon:'📄'},
+  'CI/CD':               {bg:'rgba(60,70,80,0.2)',     border:'rgba(110,120,130,0.3)', text:'#CCCCCC', icon:'⚙️'},
 };
 
 const PIPELINE_STAGES = [
-  {label:'SOURCE',    sub:'MES/ERP/Oracle',      color:'#8B5CF6', bg:'rgba(139,92,246,0.13)',  border:'rgba(139,92,246,0.42)'},
-  {label:'INGEST',    sub:'ADF Pipelines',        color:'#0078D4', bg:'rgba(0,120,212,0.13)',   border:'rgba(0,120,212,0.5)'},
-  {label:'BRONZE',    sub:'Raw → ADLS Gen2',      color:'#CD853F', bg:'rgba(205,133,63,0.13)',  border:'rgba(205,133,63,0.42)'},
-  {label:'TRANSFORM', sub:'Databricks PySpark',   color:'#FF3621', bg:'rgba(255,54,33,0.13)',   border:'rgba(255,54,33,0.42)'},
-  {label:'SILVER',    sub:'Cleansed + dbt',       color:'#94A3B8', bg:'rgba(148,163,184,0.1)',  border:'rgba(148,163,184,0.32)'},
-  {label:'GOLD',      sub:'Aggregated / Delta',   color:'#F59E0B', bg:'rgba(245,158,11,0.13)',  border:'rgba(245,158,11,0.42)'},
-  {label:'SERVE',     sub:'Synapse + Power BI',   color:'#10B981', bg:'rgba(16,185,129,0.13)',  border:'rgba(16,185,129,0.42)'},
+  {label:'SOURCE',    sub:'MES/ERP/Oracle + Kafka',   color:'#8B5CF6', bg:'rgba(139,92,246,0.13)',  border:'rgba(139,92,246,0.42)'},
+  {label:'INGEST',    sub:'ADF + Kafka Streams',      color:'#0078D4', bg:'rgba(0,120,212,0.13)',   border:'rgba(0,120,212,0.5)'},
+  {label:'BRONZE',    sub:'Raw → ADLS Gen2',          color:'#CD853F', bg:'rgba(205,133,63,0.13)',  border:'rgba(205,133,63,0.42)'},
+  {label:'TRANSFORM', sub:'Databricks PySpark',       color:'#FF3621', bg:'rgba(255,54,33,0.13)',   border:'rgba(255,54,33,0.42)'},
+  {label:'SILVER',    sub:'Cleansed + dbt',           color:'#94A3B8', bg:'rgba(148,163,184,0.1)',  border:'rgba(148,163,184,0.32)'},
+  {label:'GOLD',      sub:'Aggregated / Delta',       color:'#F59E0B', bg:'rgba(245,158,11,0.13)',  border:'rgba(245,158,11,0.42)'},
+  {label:'SERVE',     sub:'Synapse / Snowflake / BI', color:'#10B981', bg:'rgba(16,185,129,0.13)',  border:'rgba(16,185,129,0.42)'},
 ];
 
 const PIPELINE_DETAILS = {
-  SOURCE:    {tools:['MES System','ERP System','Oracle DB','SMT Machines'],       desc:'Manufacturing systems and on-premises Oracle databases as raw data sources.'},
-  INGEST:    {tools:['Azure Data Factory','ADF Triggers','Watermarking','Tumbling Windows'], desc:'Incremental ADF pipelines with watermarking — only new records processed each run.'},
+  SOURCE:    {tools:['MES System','ERP System','Oracle DB','SMT Machines'],       desc:'Manufacturing systems, on-premises Oracle databases, and machine telemetry streamed via Kafka as raw data sources.'},
+  INGEST:    {tools:['Azure Data Factory','ADF Triggers','Watermarking','Apache Kafka'], desc:'Incremental ADF pipelines with watermarking for batch loads; Kafka consumers (PySpark Structured Streaming) for real-time machine telemetry — sub-minute latency for defect alerts.'},
   BRONZE:    {tools:['ADLS Gen2','Delta Lake','Parquet','Raw Schema'],            desc:'Raw data landed exactly as received. Full audit trail. No transformations yet.'},
-  TRANSFORM: {tools:['Azure Databricks','PySpark','Python','Great Expectations'], desc:'Distributed PySpark transforms with Great Expectations quality gates before promotion.'},
-  SILVER:    {tools:['Delta Lake','dbt Models','dbt Tests','Schema Enforcement'],  desc:'Cleansed, enriched, quality-validated data. All dbt schema tests must pass.'},
-  GOLD:      {tools:['Aggregations','SCD Type 2','Star Schema','Delta Lake'],     desc:'Business-ready metrics — yield, OEE, defect rates — optimised for BI queries.'},
-  SERVE:     {tools:['Synapse Analytics','Power BI','Azure SQL','Self-Serve'],    desc:'Executive dashboards and self-serve reports consumed by production heads daily.'},
+  TRANSFORM: {tools:['Azure Databricks','PySpark','Spark Structured Streaming','Great Expectations'], desc:'Distributed PySpark transforms with Great Expectations quality gates before promotion. Structured Streaming for real-time paths.'},
+  SILVER:    {tools:['Delta Lake','dbt Models','dbt Tests','Schema Enforcement'],  desc:'Cleansed, enriched, quality-validated data. All dbt schema tests and freshness checks must pass.'},
+  GOLD:      {tools:['Aggregations','SCD Type 2','Star Schema','Snowflake'],      desc:'Business-ready metrics — yield, OEE, defect rates — optimised for BI queries. Gold layer migrated to Snowflake for cross-team self-serve analytics.'},
+  SERVE:     {tools:['Synapse Analytics','Snowflake','Power BI','Self-Serve'],    desc:'Executive dashboards and self-serve reports. Snowflake enables cross-team analytics with RBAC; Power BI dashboards consumed by production heads daily.'},
 };
 
 const STATS = [
-  {num:'2+',   label:'Years Exp'},
+  {num:'2.5+', label:'Years Exp'},
   {num:'1M+',  label:'Records/Mo'},
   {num:'90%',  label:'Time Saved'},
   {num:'20+',  label:'ADF Pipelines'},
@@ -326,12 +302,16 @@ const EXPERIENCE = [
     period:'Mar 2024 – Present', color:'#0078D4',
     points:[
       'Cut production analysis time by <b>90%</b> — automated 1M+ monthly logs through ADF → Databricks → Synapse pipeline.',
+      'Built <b>real-time event streaming</b> using Apache Kafka to ingest machine telemetry from MES systems — sub-minute latency for defect detection alerts across all manufacturing lines.',
+      'Designed <b>Kafka-based log ingestion pipeline</b> with PySpark Structured Streaming — events streamed into ADLS Gen2, processed through the medallion pipeline.',
       'Built complete <b>Bronze → Silver → Gold medallion architecture</b> on ADLS Gen2 and Delta Lake from scratch.',
-      'Introduced <b>dbt transformation models</b> with schema tests replacing untested ad-hoc SQL scripts.',
+      'Migrated <b>Gold-layer datasets to Snowflake</b> for cross-team self-serve analytics — configured schemas, RBAC, and validated full data parity between Synapse and Snowflake.',
+      'Introduced <b>dbt transformation models</b> with schema tests and freshness checks replacing untested ad-hoc SQL scripts.',
       'Implemented <b>Great Expectations</b> quality gates — broken data now caught before it reaches dashboards.',
       'Brought all infrastructure under <b>Terraform</b> — reproducible environments across dev, staging, and prod.',
       'Saved <b>100+ engineering hours/month</b> automating SMT, Final Assembly, and Packaging line reporting.',
       'Built <b>Grafana + Azure Monitor</b> observability — failures alert within 2 minutes with full context.',
+      'Halved MES extraction query time by pushing <b>complex filtering into PL/SQL stored procedures</b> at the source.',
       'Implemented <b>Unity Catalog</b> for data governance, RBAC, and metadata management across Databricks.',
     ],
   },
@@ -354,11 +334,20 @@ const EXPERIENCE = [
 const DE_PROJECTS = [
   {
     title:'Azure Manufacturing Data Pipeline', type:'Production · Data Engineering', featured:true,
-    desc:'End-to-end ETL/ELT pipeline replacing manual log analysis for 1M+ monthly production records across SMT, Assembly, and Packaging lines. Built at Optiemus Electronics.',
-    impact:['90% reduction in analysis time','100+ engineering hours saved/month','4 live Power BI dashboards used daily'],
-    pipeline:['MES/ERP','ADF','Databricks','Delta Lake','Power BI'],
+    desc:'End-to-end ETL/ELT pipeline replacing manual log analysis for 1M+ monthly production records across SMT, Assembly, and Packaging lines. Built at Optiemus Electronics — includes real-time Kafka streaming for machine telemetry.',
+    impact:['90% reduction in analysis time','100+ engineering hours saved/month','Sub-minute latency for defect detection via Kafka + Spark Streaming'],
+    pipeline:['MES/Kafka','ADF','Databricks','Delta Lake','Power BI'],
     pColors:['#8B5CF6','#0078D4','#FF3621','#F59E0B','#10B981'],
-    tags:['Azure Data Factory','PySpark','Delta Lake','Azure Synapse','Power BI','Terraform','Great Expectations','Azure Monitor'],
+    tags:['Azure Data Factory','Apache Kafka','Spark Streaming','Delta Lake','Azure Synapse','Power BI','Terraform','Great Expectations','Azure Monitor'],
+    github:null,
+  },
+  {
+    title:'Snowflake Migration & Self-Serve Analytics', type:'Production · Data Engineering', featured:true,
+    desc:'Migrated Gold-layer star-schema fact and dimension tables from Azure Synapse to Snowflake. Configured schemas, RBAC, and automated data parity validation scripts in Python — enabling cross-team self-serve analytics on a cloud-native warehouse.',
+    impact:['Full data parity validated via automated Python reconciliation scripts','RBAC policies for role-level access control','Eliminated data access bottlenecks across teams'],
+    pipeline:['Synapse Gold','Migration','Snowflake','RBAC','Self-Serve'],
+    pColors:['#0078D4','#6B7280','#29B5E8','#10B981','#F59E0B'],
+    tags:['Snowflake','Azure Synapse','Python','Star Schema','RBAC','SCD Type 2'],
     github:null,
   },
   {
@@ -371,7 +360,7 @@ const DE_PROJECTS = [
     github:'https://github.com/Neeraj600/iot-lakehouse-pipeline',
   },
   {
-    title:'Real-Time Fraud Detection Pipeline', type:'Open Source · Streaming', featured:true,
+    title:'Real-Time Fraud Detection Pipeline', type:'Open Source · Streaming', featured:false,
     desc:'Kafka → PySpark Structured Streaming pipeline scoring transactions through a 7-rule fraud engine and routing results to Delta Lake in under 30 seconds.',
     impact:['8,000+ transactions/second throughput','Detection latency p50: 8s, p99: 22s','Rule engine as Catalyst expressions — no slow UDFs'],
     pipeline:['Kafka','PySpark Stream','Rule Engine','Delta Lake','Grafana'],
@@ -425,10 +414,10 @@ const DA_PROJECTS = [
 ];
 
 const SKILL_GROUPS = [
-  {cat:'Azure Cloud Stack',         color:'#0078D4', icon:'☁️',  skills:['Azure Data Factory','Azure Databricks','Synapse Analytics','ADLS Gen2','Azure Event Hubs','Azure Key Vault','Azure Purview','Azure Monitor','Azure DevOps']},
-  {cat:'Big Data & Processing',     color:'#FF3621', icon:'⚡',  skills:['Apache Spark','PySpark','Delta Lake','Apache Iceberg','Apache Kafka','Spark Streaming','Apache Airflow','Apache Flink']},
+  {cat:'Azure Cloud Stack',         color:'#0078D4', icon:'☁️',  skills:['Azure Data Factory','Azure Databricks','Synapse Analytics','ADLS Gen2','Azure Event Hubs','Azure Key Vault','Azure Purview','Azure Cosmos DB','Azure Monitor','Azure DevOps']},
+  {cat:'Big Data & Streaming',      color:'#FF3621', icon:'⚡',  skills:['Apache Spark','PySpark','Delta Lake','Apache Kafka','Spark Structured Streaming','Apache Iceberg','Apache Airflow','Apache Flink']},
   {cat:'Data Transformation',       color:'#FF694A', icon:'🔄',  skills:['dbt','Medallion Architecture','SCD Type 2','Data Vault 2.0','Incremental Loading','Watermarking','Star Schema','ELT / ETL']},
-  {cat:'Data Quality & Governance', color:'#10B981', icon:'🛡️',  skills:['Great Expectations','dbt Tests','Unity Catalog','Data Lineage','RBAC','GDPR Compliance','Data Contracts']},
+  {cat:'Data Quality & Governance', color:'#10B981', icon:'🛡️',  skills:['Great Expectations','dbt Tests','Unity Catalog','Azure Purview','Data Lineage','RBAC','GDPR Compliance','Data Contracts']},
   {cat:'Warehousing & Storage',     color:'#29B5E8', icon:'🗄️',  skills:['Snowflake','Synapse Dedicated Pools','Delta Lake','Apache Iceberg','Oracle','MySQL','Parquet','Avro']},
   {cat:'DevOps & IaC',              color:'#7B42BC', icon:'⚙️',  skills:['Terraform','Docker','GitHub Actions','Azure DevOps','ARM Templates','Bicep','CI/CD Pipelines','Kubernetes']},
   {cat:'Languages',                 color:'#3776AB', icon:'💻',  skills:['Python','PySpark','SQL (Advanced)','PL/SQL','Bash','PowerShell','C#','JavaScript']},
@@ -442,7 +431,7 @@ const CERTS = [
   {title:'Databricks Certified Data Engineer Associate',                 issuer:'Databricks',   year:'2026', status:'in-progress', color:'#FF3621', icon:'🔶'},
 ];
 
-const TICKER = ['Azure Data Factory','Azure Databricks','PySpark','Delta Lake','Apache Kafka','dbt','Snowflake','Synapse Analytics','Terraform','Great Expectations','Apache Iceberg','Power BI','Apache Airflow','GitHub Actions','Docker','Python','Unity Catalog','ADLS Gen2','Spark Streaming','CI/CD','Medallion Architecture','Data Vault 2.0'];
+const TICKER = ['Azure Data Factory','Apache Kafka','PySpark','Delta Lake','Spark Streaming','dbt','Snowflake','Synapse Analytics','Terraform','Great Expectations','Apache Iceberg','Power BI','Apache Airflow','GitHub Actions','Docker','Python','Unity Catalog','ADLS Gen2','Spark Structured Streaming','CI/CD','Medallion Architecture','Data Vault 2.0','Azure Purview','RBAC'];
 
 // ── HOOKS ────────────────────────────────────────────────────────────────────
 
@@ -493,40 +482,19 @@ function Cursor() {
   );
 }
 
-// ── NAVBAR ───────────────────────────────────────────────────────────────────
-
-const NAV_LINKS = [
-  ['#about','about'],['#experience','experience'],['#pipeline','pipeline'],
-  ['#de-projects','de_projects'],['#da-projects','da_projects'],
-  ['#skills','skills'],['#certs','certs'],['#contact','contact'],
-];
-
-// ── THEME TOGGLE BUTTON ───────────────────────────────────────────────────────
+// ── THEME TOGGLE ──────────────────────────────────────────────────────────────
 function ThemeToggle() {
   const { dark, toggle } = useTheme();
   return (
-    <button
-      onClick={toggle}
-      className="theme-toggle"
-      title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      aria-label="Toggle theme"
-    >
-      <div className={`theme-toggle-thumb ${dark ? '' : 'light-thumb'}`}>
-        {dark ? '🌙' : '☀️'}
-      </div>
+    <button onClick={toggle} className="theme-toggle" title={dark ? 'Switch to light mode' : 'Switch to dark mode'} aria-label="Toggle theme">
+      <div className={`theme-toggle-thumb ${dark ? '' : 'light-thumb'}`}>{dark ? '🌙' : '☀️'}</div>
     </button>
   );
 }
 
-// ── DOWNLOAD RESUME BUTTON ────────────────────────────────────────────────────
 function DownloadBtn({ compact = false }) {
   return (
-    <a
-      href="Neeraj_Singh_Guleria_Resume.pdf"
-      download="Neeraj_Singh_Guleria_Resume.pdf"
-      className="dl-btn"
-      title="Download Resume PDF"
-    >
+    <a href="Neeraj_Guleria_Resume.pdf" download="Neeraj_Guleria_Resume.pdf" className="dl-btn" title="Download Resume PDF">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
         <polyline points="7 10 12 15 17 10"/>
@@ -537,11 +505,17 @@ function DownloadBtn({ compact = false }) {
   );
 }
 
+const NAV_LINKS = [
+  ['#about','about'],['#experience','experience'],['#pipeline','pipeline'],
+  ['#de-projects','de_projects'],['#da-projects','da_projects'],
+  ['#skills','skills'],['#certs','certs'],['#contact','contact'],
+];
+
 function Navbar() {
   const { dark } = useTheme();
-  const [scrolled,  setScrolled]  = useState(false);
-  const [active,    setActive]    = useState('');
-  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive]     = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const fn = () => {
@@ -554,19 +528,16 @@ function Navbar() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  const mutedColor = dark ? '#64748B' : '#5A6E94';
+  const mutedColor  = dark ? '#64748B' : '#5A6E94';
   const activeColor = dark ? '#00D4FF' : '#0060B0';
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled?'glass border-b py-3':'py-5'}`}
       style={{borderColor:'rgba(0,120,212,0.15)'}}>
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
-        {/* Logo */}
         <a href="#" className="font-mono text-sm tracking-widest flex-shrink-0" style={{color:'#0078D4'}}>
           neeraj<span style={{color:'#F59E0B'}}>.</span><span style={{color:'#50B4FC'}}>dev</span>
         </a>
-
-        {/* Desktop nav links */}
         <ul className="hidden lg:flex items-center gap-5 flex-1 justify-center">
           {NAV_LINKS.map(([href,label]) => (
             <li key={href}>
@@ -577,16 +548,9 @@ function Navbar() {
             </li>
           ))}
         </ul>
-
-        {/* Right side controls */}
         <div className="hidden md:flex items-center gap-3 flex-shrink-0">
-          {/* Download resume */}
           <DownloadBtn />
-
-          {/* Theme toggle */}
           <ThemeToggle />
-
-          {/* Available badge */}
           <a href="mailto:neerajguleria956@gmail.com"
             className="inline-flex items-center gap-2 px-3 py-1.5 font-mono text-xs tracking-wider rounded transition-all duration-200"
             style={{border:'1px solid rgba(0,120,212,0.35)',color:'#50B4FC',background:'rgba(0,120,212,0.06)'}}
@@ -596,8 +560,6 @@ function Navbar() {
             Available
           </a>
         </div>
-
-        {/* Mobile: theme + hamburger */}
         <div className="md:hidden flex items-center gap-3">
           <ThemeToggle />
           <button className="text-slate-400 hover:text-white transition-colors" onClick={()=>setMenuOpen(!menuOpen)}>
@@ -607,8 +569,6 @@ function Navbar() {
           </button>
         </div>
       </div>
-
-      {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden glass px-6 py-4 border-t" style={{borderColor:'rgba(0,120,212,0.15)'}}>
           {NAV_LINKS.map(([href,label]) => (
@@ -620,10 +580,7 @@ function Navbar() {
               {label}
             </a>
           ))}
-          {/* Download in mobile menu */}
-          <div className="pt-4">
-            <DownloadBtn />
-          </div>
+          <div className="pt-4"><DownloadBtn /></div>
         </div>
       )}
     </nav>
@@ -674,11 +631,8 @@ function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center overflow-hidden bg-grid">
       <Particles/>
-      {/* Radial glow */}
       <div className="absolute inset-0 z-0 pointer-events-none" style={{background:'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,120,212,0.18), transparent)'}}/>
-      {/* Top line */}
       <div className="absolute top-0 left-0 right-0 h-px z-0" style={{background:'linear-gradient(90deg,transparent,rgba(0,120,212,0.5),transparent)'}}/>
-      {/* Background pipeline SVG */}
       <svg className="absolute inset-0 z-0 w-full h-full pointer-events-none opacity-20" preserveAspectRatio="xMidYMid slice">
         <path d="M 0 55% Q 30% 35% 55% 52% Q 78% 70% 100% 48%" fill="none" stroke="#0078D4" strokeWidth="1" className="flow-line"/>
         <path d="M 0 35% Q 28% 55% 58% 32% Q 82% 15% 100% 38%" fill="none" stroke="#00D4FF" strokeWidth="0.7" className="flow-slow"/>
@@ -687,26 +641,21 @@ function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 pb-16 w-full">
         <div className="max-w-2xl">
-          {/* Badge */}
           <div className="anim-slide-1 inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
             style={{border:'1px solid rgba(0,120,212,0.32)',background:'rgba(0,120,212,0.07)'}}>
             <span className="w-2 h-2 rounded-full bg-[#10B981]" style={{animation:'pulseGlow 2s ease-in-out infinite'}}/>
             <span className="font-mono text-[0.68rem] tracking-widest uppercase" style={{color:'#50B4FC'}}>Open to Data Engineering Roles</span>
           </div>
-          {/* Name */}
           <h1 className="font-display font-extrabold leading-[0.95] mb-3 anim-slide-2">
             <span className="block text-5xl md:text-7xl text-white">Neeraj Singh</span>
             <span className="block text-5xl md:text-7xl text-grad-neon" style={{filter:'drop-shadow(0 0 30px rgba(0,212,255,0.35))'}}>Guleria</span>
           </h1>
-          {/* Title */}
           <div className="font-mono text-lg md:text-xl mb-5 tracking-wide anim-slide-3" style={{color:'#F59E0B'}}>
             <span className="text-slate-500">&lt;</span> Azure Data Engineer <span className="text-slate-500">/&gt;</span>
           </div>
-          {/* Desc */}
           <p className="font-body text-base text-slate-400 leading-relaxed mb-8 max-w-xl anim-slide-4">
-            I build pipelines that process <span className="text-white font-medium">1M+ records a month</span> and don't break at 2am. Azure-first. Real production scale. Obsessed with <span style={{color:'#50B4FC'}}>data quality</span> and <span style={{color:'#10B981'}}>observability</span>.
+            I build pipelines that process <span className="text-white font-medium">1M+ records a month</span> — batch and real-time Kafka streams — and don't break at 2am. Azure-first. Production scale. Obsessed with <span style={{color:'#50B4FC'}}>data quality</span> and <span style={{color:'#10B981'}}>observability</span>.
           </p>
-          {/* Stats */}
           <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mb-8 anim-slide-4">
             {STATS.map((s,i) => (
               <div key={i} className="text-center p-3 rounded-xl transition-all duration-200 group"
@@ -718,7 +667,6 @@ function Hero() {
               </div>
             ))}
           </div>
-          {/* Buttons */}
           <div className="flex flex-wrap gap-3 anim-slide-5">
             {[
               {href:'#de-projects', label:'View Projects →', primary:true},
@@ -736,23 +684,19 @@ function Hero() {
                 {b.label}
               </a>
             ))}
-            {/* Download Resume */}
             <DownloadBtn />
           </div>
         </div>
 
-        {/* Right: vertical pipeline diagram */}
         <div className="hidden xl:flex flex-col items-center absolute right-16 top-1/2 -translate-y-1/2 z-10">
           {PIPELINE_STAGES.map((s,i) => (
             <div key={s.label} className="flex flex-col items-center">
               <div className="relative px-4 py-2.5 rounded-xl text-center transition-all duration-300 hover:scale-105 hover:-translate-x-1 group"
-                style={{background:s.bg,border:`1px solid ${s.border}`,minWidth:'188px',cursor:'default'}}
+                style={{background:s.bg,border:`1px solid ${s.border}`,minWidth:'200px',cursor:'default'}}
                 onMouseEnter={e=>{e.currentTarget.style.boxShadow=`0 6px 20px ${s.color}30`;}}
                 onMouseLeave={e=>{e.currentTarget.style.boxShadow='none';}}>
                 <div className="font-mono text-[0.58rem] tracking-widest opacity-70 mb-0.5" style={{color:s.color}}>{s.label}</div>
                 <div className="font-body text-xs text-slate-300">{s.sub}</div>
-                {/* Scan line on hover */}
-                <div className="absolute inset-x-0 h-px opacity-0 group-hover:opacity-60 transition-opacity" style={{background:`linear-gradient(90deg,transparent,${s.color},transparent)`,animation:'scanLine 2s linear infinite'}}/>
               </div>
               {i < PIPELINE_STAGES.length-1 && (
                 <svg width="2" height="26" className="overflow-visible">
@@ -765,7 +709,6 @@ function Hero() {
         </div>
       </div>
 
-      {/* Scroll hint */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-35">
         <span className="font-mono text-[0.58rem] text-slate-500 tracking-widest">SCROLL</span>
         <div className="w-px h-10" style={{background:'linear-gradient(to bottom,#0078D4,transparent)',animation:'pulseGlow 2s ease-in-out infinite'}}/>
@@ -792,7 +735,7 @@ function About() {
           <div className="grid md:grid-cols-2 gap-10 max-w-4xl">
             <div>
               <p className="font-body text-slate-400 leading-relaxed text-[1.02rem] mb-4">
-                I'm a Data Engineer based in New Delhi with 2+ years of hands-on experience on the Azure stack. Currently at <span className="text-white">Optiemus Electronics</span>, where I own the full data lifecycle — from raw ingestion out of MES and ERP systems, through PySpark transformations in Databricks, to the Power BI dashboards that production heads use every morning.
+                I'm a Data Engineer based in New Delhi with 2.5+ years of hands-on experience on the Azure stack. Currently at <span className="text-white">Optiemus Electronics</span>, where I own the full data lifecycle — from raw ingestion out of MES and ERP systems (batch via ADF, real-time via Kafka), through PySpark transformations in Databricks, to the Power BI dashboards that production heads use every morning.
               </p>
               <p className="font-body text-slate-500 leading-relaxed text-sm">
                 I care about pipelines being <span style={{color:'#50B4FC'}}>reliable</span>, <span style={{color:'#F59E0B'}}>observable</span>, and <span style={{color:'#10B981'}}>tested</span> — not just running. A pipeline that crashes is easier to fix than one that silently produces wrong answers.
@@ -817,7 +760,6 @@ function About() {
             </div>
           </div>
         </div>
-        {/* Ticker */}
         <div className="overflow-hidden my-12 py-3 ticker-wrapper" style={{borderTop:'1px solid rgba(0,120,212,0.12)',borderBottom:'1px solid rgba(0,120,212,0.12)',background:'rgba(0,120,212,0.02)'}}>
           <div className="flex gap-8 whitespace-nowrap anim-ticker">
             {doubled.map((item,i) => (
@@ -894,33 +836,31 @@ function Experience() {
 // ── PIPELINE VIZ ─────────────────────────────────────────────────────────────
 
 const PIPELINE_EXTRA = {
-  SOURCE:    { icon:'🗄️', record:'Raw source systems', badge:'INPUT',   metrics:[{k:'Systems',v:'MES, ERP, Oracle'},{k:'Format',v:'Structured + Semi-structured'},{k:'Frequency',v:'Hourly trigger'}] },
-  INGEST:    { icon:'🔷', record:'Azure Data Factory', badge:'INGEST',  metrics:[{k:'Pipelines',v:'20+ ADF pipelines'},{k:'Pattern',v:'Watermark + Tumbling Window'},{k:'Retry',v:'3× with backoff'}] },
+  SOURCE:    { icon:'🗄️', record:'Raw source systems', badge:'INPUT',   metrics:[{k:'Systems',v:'MES, ERP, Oracle'},{k:'Streaming',v:'Kafka telemetry'},{k:'Frequency',v:'Real-time + hourly batch'}] },
+  INGEST:    { icon:'🔷', record:'ADF + Kafka',         badge:'INGEST',  metrics:[{k:'Batch',v:'20+ ADF pipelines'},{k:'Streaming',v:'Kafka Structured Streaming'},{k:'Retry',v:'3× with backoff'}] },
   BRONZE:    { icon:'📦', record:'Raw landing zone',   badge:'RAW',     metrics:[{k:'Storage',v:'ADLS Gen2'},{k:'Format',v:'Parquet / Delta'},{k:'Retention',v:'Full audit trail'}] },
   TRANSFORM: { icon:'⚡', record:'Databricks cluster', badge:'COMPUTE', metrics:[{k:'Engine',v:'PySpark distributed'},{k:'Quality',v:'Great Expectations gates'},{k:'Scale',v:'1M+ records/month'}] },
   SILVER:    { icon:'🔄', record:'dbt models',         badge:'CLEAN',   metrics:[{k:'Models',v:'Staging → Intermediate'},{k:'Tests',v:'Schema + freshness checks'},{k:'Lineage',v:'Full column lineage'}] },
-  GOLD:      { icon:'⭐', record:'Aggregated metrics',  badge:'SERVE',   metrics:[{k:'Tables',v:'5 fact + 12 dim'},{k:'Schema',v:'Star schema / SCD Type 2'},{k:'Optimised',v:'Z-ordering + compaction'}] },
-  SERVE:     { icon:'📊', record:'End consumers',      badge:'OUTPUT',  metrics:[{k:'Dashboards',v:'4 live Power BI'},{k:'Users',v:'Production heads + mgmt'},{k:'Refresh',v:'Daily by 6am SLA'}] },
+  GOLD:      { icon:'⭐', record:'Aggregated metrics',  badge:'SERVE',   metrics:[{k:'Tables',v:'5 fact + 12 dim'},{k:'Schema',v:'Star schema / SCD Type 2'},{k:'Warehouse',v:'Synapse + Snowflake'}] },
+  SERVE:     { icon:'📊', record:'End consumers',      badge:'OUTPUT',  metrics:[{k:'Dashboards',v:'4 live Power BI'},{k:'Snowflake',v:'Cross-team self-serve'},{k:'Refresh',v:'Daily by 6am SLA'}] },
 };
 
 function PipelineViz() {
   const [active,  setActive]  = useState('SOURCE');
   const [locked,  setLocked]  = useState(false);
   const [hovered, setHovered] = useState(null);
-  const timerRef   = useRef(null);
-  const unlockRef  = useRef(null);
-  const lockedRef  = useRef(false);
+  const timerRef  = useRef(null);
+  const unlockRef = useRef(null);
+  const lockedRef = useRef(false);
   const ref = useReveal();
   const { dark } = useTheme();
 
   const textPrimary   = dark ? '#E2E8F0' : '#1A2540';
   const textSecondary = dark ? '#64748B' : '#5A6E94';
   const cardBg        = dark ? 'rgba(12,17,32,0.9)' : 'rgba(255,255,255,0.95)';
-  const stageBg       = dark ? 'rgba(12,17,32,0.7)' : 'rgba(255,255,255,0.8)';
 
   lockedRef.current = locked;
 
-  // Auto-advance every 15s — skips when locked
   useEffect(() => {
     timerRef.current = setInterval(() => {
       if (!lockedRef.current) {
@@ -929,23 +869,21 @@ function PipelineViz() {
           return PIPELINE_STAGES[(idx + 1) % PIPELINE_STAGES.length].label;
         });
       }
-    }, 15000);
+    }, 1000);
     return () => { clearInterval(timerRef.current); clearTimeout(unlockRef.current); };
   }, []);
 
   const handleClick = (label) => {
     clearTimeout(unlockRef.current);
     if (locked && active === label) {
-      setLocked(false); // click locked stage again → unlock
+      setLocked(false);
     } else {
       setActive(label);
       setLocked(true);
-      // auto-unlock after 45s idle
       unlockRef.current = setTimeout(() => setLocked(false), 45000);
     }
   };
 
-  // hover previews without locking; falling back to active when not hovering
   const displayLabel = hovered || active;
   const activeStage  = PIPELINE_STAGES.find(s => s.label === displayLabel);
   const activeDetail = PIPELINE_DETAILS[displayLabel];
@@ -955,20 +893,14 @@ function PipelineViz() {
     <section id="pipeline" className="py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div ref={ref} className="reveal">
-
-          {/* Header */}
           <p className="font-mono text-xs tracking-[0.2em] uppercase mb-3 flex items-center gap-3" style={{color:'#0078D4'}}>
             <span className="w-8 h-px bg-[#0078D4]"/>Architecture
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-2" style={{color:textPrimary}}>
             My data pipeline.
           </h2>
-
-          {/* Subtitle + status pill */}
           <div className="flex items-center gap-3 mb-10 flex-wrap">
-            <p className="font-body text-sm" style={{color:textSecondary}}>
-              Hover to preview · Click to lock · Auto-advances every 15s
-            </p>
+            <p className="font-body text-sm" style={{color:textSecondary}}>Hover to preview · Click to lock</p>
             {locked ? (
               <span className="font-mono text-[0.58rem] tracking-widest px-2.5 py-1 rounded-full"
                 style={{background:'rgba(245,158,11,0.12)', border:'1px solid rgba(245,158,11,0.35)', color:'#F59E0B'}}>
@@ -983,10 +915,7 @@ function PipelineViz() {
             )}
           </div>
 
-          {/* Two-column layout */}
           <div className="grid lg:grid-cols-[320px_1fr] gap-6 items-start">
-
-            {/* LEFT — vertical stage list */}
             <div className="flex flex-col gap-0">
               {PIPELINE_STAGES.map((s, i) => {
                 const isDisplay = displayLabel === s.label;
@@ -994,7 +923,6 @@ function PipelineViz() {
                 const extra = PIPELINE_EXTRA[s.label];
                 return (
                   <div key={s.label} className="flex flex-col items-stretch">
-                    {/* Stage row */}
                     <button
                       onMouseEnter={() => setHovered(s.label)}
                       onMouseLeave={() => setHovered(null)}
@@ -1005,67 +933,33 @@ function PipelineViz() {
                         border: `1px solid ${isDisplay ? s.border : 'transparent'}`,
                         boxShadow: isDisplay ? `0 4px 20px ${s.color}22` : 'none',
                         cursor: 'none',
-                      }}
-                    >
-                      {/* Icon box */}
+                      }}>
                       <div className="relative flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200"
-                        style={{
-                          background: isDisplay ? `${s.color}20` : 'rgba(255,255,255,0.04)',
-                          border: `1px solid ${isDisplay ? s.border : 'rgba(255,255,255,0.06)'}`,
-                        }}>
+                        style={{background: isDisplay ? `${s.color}20` : 'rgba(255,255,255,0.04)', border: `1px solid ${isDisplay ? s.border : 'rgba(255,255,255,0.06)'}`}}>
                         <span style={{fontSize:'1.1rem'}}>{extra.icon}</span>
-                        {isLocked && (
-                          <span className="absolute -top-1 -right-1 font-mono text-[0.5rem] w-4 h-4 rounded-full flex items-center justify-center"
-                            style={{background:s.color, color:'#000', fontWeight:700, fontSize:'9px'}}>
-                            🔒
-                          </span>
-                        )}
-                        {isDisplay && !locked && (
-                          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full"
-                            style={{background:s.color, boxShadow:`0 0 6px ${s.color}`, animation:`nodePulse ${1.4+i*.2}s ease-in-out infinite`}}/>
-                        )}
+                        {isLocked && <span className="absolute -top-1 -right-1 font-mono text-[0.5rem] w-4 h-4 rounded-full flex items-center justify-center" style={{background:s.color, color:'#000', fontWeight:700, fontSize:'9px'}}>🔒</span>}
+                        {isDisplay && !locked && <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full" style={{background:s.color, boxShadow:`0 0 6px ${s.color}`, animation:`nodePulse ${1.4+i*.2}s ease-in-out infinite`}}/>}
                       </div>
-
-                      {/* Labels */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-[0.6rem] tracking-widest font-medium transition-colors duration-200"
-                            style={{color: isDisplay ? s.color : textSecondary}}>
+                          <span className="font-mono text-[0.6rem] tracking-widest font-medium transition-colors duration-200" style={{color: isDisplay ? s.color : textSecondary}}>
                             {String(i+1).padStart(2,'0')} {s.label}
                           </span>
                           {isDisplay && (
-                            <span className="font-mono text-[0.5rem] tracking-widest px-1.5 py-0.5 rounded"
-                              style={{background:`${s.color}18`, color:s.color, border:`1px solid ${s.color}35`}}>
+                            <span className="font-mono text-[0.5rem] tracking-widest px-1.5 py-0.5 rounded" style={{background:`${s.color}18`, color:s.color, border:`1px solid ${s.color}35`}}>
                               {isLocked ? 'LOCKED' : extra.badge}
                             </span>
                           )}
                         </div>
-                        <div className="font-body text-xs truncate mt-0.5 transition-colors duration-200"
-                          style={{color: isDisplay ? textPrimary : textSecondary}}>
-                          {s.sub}
-                        </div>
+                        <div className="font-body text-xs truncate mt-0.5 transition-colors duration-200" style={{color: isDisplay ? textPrimary : textSecondary}}>{s.sub}</div>
                       </div>
-
-                      {/* Arrow */}
-                      <span className="font-mono text-xs transition-all duration-200 flex-shrink-0"
-                        style={{
-                          color: isDisplay ? s.color : 'transparent',
-                          transform: isDisplay ? 'translateX(0)' : 'translateX(-6px)',
-                        }}>
-                        →
-                      </span>
+                      <span className="font-mono text-xs transition-all duration-200 flex-shrink-0" style={{color: isDisplay ? s.color : 'transparent', transform: isDisplay ? 'translateX(0)' : 'translateX(-6px)'}}>→</span>
                     </button>
-
-                    {/* Animated connector */}
                     {i < PIPELINE_STAGES.length - 1 && (
                       <div className="flex items-center pl-[28px] py-0.5" style={{height:'28px'}}>
                         <svg width="12" height="28" className="overflow-visible flex-shrink-0">
-                          <line x1="6" y1="0" x2="6" y2="28"
-                            stroke={s.color} strokeWidth="1.5" strokeDasharray="4 3"
-                            className="flow-line" opacity="0.55"/>
-                          <circle cx="6" cy="14" r="2.5"
-                            fill={s.color} opacity="0.85"
-                            style={{animation:`nodePulse ${1.5+i*.25}s ease-in-out ${i*.15}s infinite`}}/>
+                          <line x1="6" y1="0" x2="6" y2="28" stroke={s.color} strokeWidth="1.5" strokeDasharray="4 3" className="flow-line" opacity="0.55"/>
+                          <circle cx="6" cy="14" r="2.5" fill={s.color} opacity="0.85" style={{animation:`nodePulse ${1.5+i*.25}s ease-in-out ${i*.15}s infinite`}}/>
                         </svg>
                         {displayLabel === s.label && (
                           <span className="font-mono text-[0.52rem] ml-2 tracking-wider" style={{color:`${s.color}75`}}>
@@ -1079,48 +973,31 @@ function PipelineViz() {
               })}
             </div>
 
-            {/* RIGHT — detail panel */}
             {activeStage && (
               <div className="rounded-2xl overflow-hidden" style={{border:`1px solid ${activeStage.border}`, background: cardBg, boxShadow:`0 8px 40px ${activeStage.color}18`}}>
-
-                {/* Panel header with gradient banner */}
-                <div className="px-6 py-5 relative overflow-hidden"
-                  style={{background:`linear-gradient(135deg, ${activeStage.color}18, ${activeStage.color}06)`}}>
-                  {/* Background pattern */}
-                  <div className="absolute inset-0 opacity-10"
-                    style={{backgroundImage:'radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)', backgroundSize:'20px 20px'}}/>
+                <div className="px-6 py-5 relative overflow-hidden" style={{background:`linear-gradient(135deg, ${activeStage.color}18, ${activeStage.color}06)`}}>
+                  <div className="absolute inset-0 opacity-10" style={{backgroundImage:'radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)', backgroundSize:'20px 20px'}}/>
                   <div className="relative flex items-start justify-between gap-4">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-mono text-[0.6rem] tracking-widest" style={{color:activeStage.color}}>
                           STAGE {PIPELINE_STAGES.findIndex(s=>s.label===displayLabel)+1} OF {PIPELINE_STAGES.length}
                         </span>
-                        <span className="font-mono text-[0.52rem] px-2 py-0.5 rounded-full"
-                          style={{background:`${activeStage.color}22`, border:`1px solid ${activeStage.color}45`, color:activeStage.color}}>
+                        <span className="font-mono text-[0.52rem] px-2 py-0.5 rounded-full" style={{background:`${activeStage.color}22`, border:`1px solid ${activeStage.color}45`, color:activeStage.color}}>
                           {activeExtra.badge}
                         </span>
                       </div>
-                      <h3 className="font-display text-2xl font-bold mb-0.5" style={{color: activeStage.color}}>
-                        {activeStage.label}
-                      </h3>
+                      <h3 className="font-display text-2xl font-bold mb-0.5" style={{color: activeStage.color}}>{activeStage.label}</h3>
                       <p className="font-body text-sm" style={{color:textSecondary}}>{activeStage.sub}</p>
                     </div>
-                    {/* Big icon */}
-                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-                      style={{background:`${activeStage.color}15`, border:`1px solid ${activeStage.color}35`}}>
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0" style={{background:`${activeStage.color}15`, border:`1px solid ${activeStage.color}35`}}>
                       {activeExtra.icon}
                     </div>
                   </div>
                 </div>
 
                 <div className="p-6 space-y-5">
-
-                  {/* Description */}
-                  <p className="font-body text-sm leading-relaxed" style={{color:textSecondary}}>
-                    {activeDetail.desc}
-                  </p>
-
-                  {/* Tools — 2-col card grid with brand colors */}
+                  <p className="font-body text-sm leading-relaxed" style={{color:textSecondary}}>{activeDetail.desc}</p>
                   <div>
                     <div className="font-mono text-[0.62rem] tracking-widest uppercase mb-3 flex items-center gap-2" style={{color:activeStage.color}}>
                       <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="none" stroke="currentColor" strokeWidth="1.2"/><circle cx="5" cy="5" r="1.5" fill="currentColor"/></svg>
@@ -1130,12 +1007,7 @@ function PipelineViz() {
                       {activeDetail.tools.map((t, ti) => {
                         const tool = TOOLS[t] || {bg:'rgba(100,116,139,0.1)',border:'rgba(100,116,139,0.25)',text:'#94A3B8',icon:'○'};
                         return (
-                          <div key={t}
-                            className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl"
-                            style={{
-                              background: tool.bg,
-                              border: `1px solid ${tool.border}`,
-                            }}>
+                          <div key={t} className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl" style={{background: tool.bg, border: `1px solid ${tool.border}`}}>
                             <span className="text-base flex-shrink-0 w-6 text-center leading-none">{tool.icon}</span>
                             <span className="font-mono text-[0.68rem] font-medium leading-tight" style={{color: tool.text}}>{t}</span>
                           </div>
@@ -1143,24 +1015,17 @@ function PipelineViz() {
                       })}
                     </div>
                   </div>
-
-                  {/* Metrics grid */}
                   <div>
-                    <div className="font-mono text-[0.62rem] tracking-widest uppercase mb-2.5" style={{color:activeStage.color}}>
-                      Stage Metrics
-                    </div>
+                    <div className="font-mono text-[0.62rem] tracking-widest uppercase mb-2.5" style={{color:activeStage.color}}>Stage Metrics</div>
                     <div className="grid grid-cols-3 gap-2">
                       {activeExtra.metrics.map(m => (
-                        <div key={m.k} className="p-3 rounded-xl"
-                          style={{background:`${activeStage.color}08`, border:`1px solid ${activeStage.color}20`}}>
+                        <div key={m.k} className="p-3 rounded-xl" style={{background:`${activeStage.color}08`, border:`1px solid ${activeStage.color}20`}}>
                           <div className="font-mono text-[0.55rem] tracking-wider uppercase mb-1" style={{color:`${activeStage.color}90`}}>{m.k}</div>
                           <div className="font-body text-xs font-medium leading-snug" style={{color:textPrimary}}>{m.v}</div>
                         </div>
                       ))}
                     </div>
                   </div>
-
-                  {/* Navigate prev / next */}
                   <div className="flex items-center justify-between pt-2 border-t" style={{borderColor:`${activeStage.color}18`}}>
                     <button
                       onClick={() => {
@@ -1169,29 +1034,16 @@ function PipelineViz() {
                       }}
                       disabled={PIPELINE_STAGES.findIndex(s=>s.label===displayLabel) === 0}
                       className="flex items-center gap-1.5 font-mono text-[0.65rem] tracking-wider transition-all duration-200 px-3 py-1.5 rounded-lg"
-                      style={{
-                        color: PIPELINE_STAGES.findIndex(s=>s.label===displayLabel)===0 ? 'rgba(100,116,139,0.3)' : textSecondary,
-                        cursor:'none',
-                        border:`1px solid ${PIPELINE_STAGES.findIndex(s=>s.label===displayLabel)===0 ? 'transparent' : 'rgba(255,255,255,0.08)'}`,
-                      }}
-                    >
+                      style={{color: PIPELINE_STAGES.findIndex(s=>s.label===displayLabel)===0 ? 'rgba(100,116,139,0.3)' : textSecondary, cursor:'none', border:`1px solid ${PIPELINE_STAGES.findIndex(s=>s.label===displayLabel)===0 ? 'transparent' : 'rgba(255,255,255,0.08)'}`}}>
                       ← Prev stage
                     </button>
-
-                    {/* Stage dots */}
                     <div className="flex gap-1.5">
                       {PIPELINE_STAGES.map((s,i) => (
                         <button key={i} onClick={()=>{ setActive(s.label); setLocked(true); }}
                           className="rounded-full transition-all duration-200"
-                          style={{
-                            width: displayLabel===s.label ? '20px' : '6px',
-                            height:'6px',
-                            background: displayLabel===s.label ? s.color : 'rgba(255,255,255,0.15)',
-                            cursor:'none',
-                          }}/>
+                          style={{width: displayLabel===s.label ? '20px' : '6px', height:'6px', background: displayLabel===s.label ? s.color : 'rgba(255,255,255,0.15)', cursor:'none'}}/>
                       ))}
                     </div>
-
                     <button
                       onClick={() => {
                         const idx = PIPELINE_STAGES.findIndex(s=>s.label===displayLabel);
@@ -1199,12 +1051,7 @@ function PipelineViz() {
                       }}
                       disabled={PIPELINE_STAGES.findIndex(s=>s.label===displayLabel) === PIPELINE_STAGES.length-1}
                       className="flex items-center gap-1.5 font-mono text-[0.65rem] tracking-wider transition-all duration-200 px-3 py-1.5 rounded-lg"
-                      style={{
-                        color: PIPELINE_STAGES.findIndex(s=>s.label===displayLabel)===PIPELINE_STAGES.length-1 ? 'rgba(100,116,139,0.3)' : textSecondary,
-                        cursor:'none',
-                        border:`1px solid ${PIPELINE_STAGES.findIndex(s=>s.label===displayLabel)===PIPELINE_STAGES.length-1 ? 'transparent' : 'rgba(255,255,255,0.08)'}`,
-                      }}
-                    >
+                      style={{color: PIPELINE_STAGES.findIndex(s=>s.label===displayLabel)===PIPELINE_STAGES.length-1 ? 'rgba(100,116,139,0.3)' : textSecondary, cursor:'none', border:`1px solid ${PIPELINE_STAGES.findIndex(s=>s.label===displayLabel)===PIPELINE_STAGES.length-1 ? 'transparent' : 'rgba(255,255,255,0.08)'}`}}>
                       Next stage →
                     </button>
                   </div>
@@ -1213,13 +1060,12 @@ function PipelineViz() {
             )}
           </div>
 
-          {/* Bottom metrics bar */}
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              {label:'Pipeline Type', value:'Batch + Near Real-Time',  color:'#0078D4'},
-              {label:'Records/Month', value:'1,000,000+',               color:'#FF3621'},
-              {label:'SLA',           value:'Daily refresh by 6am',    color:'#F59E0B'},
-              {label:'Quality Gate',  value:'Great Expectations + dbt', color:'#10B981'},
+              {label:'Pipeline Type', value:'Batch + Real-Time Kafka',   color:'#0078D4'},
+              {label:'Records/Month', value:'1,000,000+',                color:'#FF3621'},
+              {label:'SLA',           value:'Daily refresh by 6am',      color:'#F59E0B'},
+              {label:'Quality Gate',  value:'Great Expectations + dbt',  color:'#10B981'},
             ].map(m=>(
               <div key={m.label} className="p-4 rounded-xl transition-all duration-200"
                 style={{border:'1px solid rgba(0,120,212,0.12)',background:'rgba(0,120,212,0.03)'}}
@@ -1230,7 +1076,6 @@ function PipelineViz() {
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </section>
@@ -1248,8 +1093,6 @@ function ToolTag({name}) {
     </span>
   );
 }
-
-// ── MINI PIPELINE ────────────────────────────────────────────────────────────
 
 function MiniPipeline({stages, colors}) {
   return (
@@ -1272,9 +1115,8 @@ function MiniPipeline({stages, colors}) {
   );
 }
 
-// ── DE PROJECTS ──────────────────────────────────────────────────────────────
+// ── DE PROJECT CARD ───────────────────────────────────────────────────────────
 
-// ── DE PROJECT CARD (own component so hooks are stable) ──────────────────────
 function DEProjectCard({ p, i }) {
   const ref = useReveal(i * 90);
   return (
@@ -1283,9 +1125,6 @@ function DEProjectCard({ p, i }) {
         style={{border:'1px solid rgba(0,120,212,0.15)',background:'rgba(12,17,32,0.88)'}}
         onMouseEnter={e=>{e.currentTarget.style.borderColor='rgba(0,120,212,0.38)';}}
         onMouseLeave={e=>{e.currentTarget.style.borderColor='rgba(0,120,212,0.15)';}}>
-        <div className="absolute inset-x-0 top-0 h-px opacity-0 transition-opacity duration-300"
-          style={{background:'linear-gradient(90deg,transparent,rgba(0,120,212,0.6),transparent)'}}
-          ref={el=>{ if(el){ el.closest('.proj-card')?.addEventListener('mouseenter',()=>el.style.opacity='1'); el.closest('.proj-card')?.addEventListener('mouseleave',()=>el.style.opacity='0'); }}}/>
         {p.featured && (
           <div className="absolute top-4 right-4 font-mono text-[0.58rem] tracking-widest px-2 py-0.5 rounded-full"
             style={{background:'rgba(0,120,212,0.15)',border:'1px solid rgba(0,120,212,0.3)',color:'#50B4FC'}}>
@@ -1354,8 +1193,6 @@ function DEProjects() {
   );
 }
 
-
-
 // ── DA PROJECTS ──────────────────────────────────────────────────────────────
 
 function DAProjectCard({ p, i }) {
@@ -1372,9 +1209,7 @@ function DAProjectCard({ p, i }) {
         <p className="font-body text-xs text-slate-500 leading-relaxed mb-4">{p.desc}</p>
         <div className="flex flex-wrap gap-1 mb-4">
           {p.tags.map(t=>(
-            <span key={t} className="font-mono text-[0.58rem] px-2 py-0.5 rounded" style={{background:'rgba(245,158,11,0.07)',border:'1px solid rgba(245,158,11,0.18)',color:'#F59E0B'}}>
-              {t}
-            </span>
+            <span key={t} className="font-mono text-[0.58rem] px-2 py-0.5 rounded" style={{background:'rgba(245,158,11,0.07)',border:'1px solid rgba(245,158,11,0.18)',color:'#F59E0B'}}>{t}</span>
           ))}
         </div>
         <a href={p.github} target="_blank" rel="noreferrer"
@@ -1400,9 +1235,7 @@ function DAProjects() {
           <p className="font-body text-slate-500 mt-2 text-sm">Python, SQL, EDA. Open source on GitHub.</p>
         </div>
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          {DA_PROJECTS.map((p,i) => (
-            <DAProjectCard key={i} p={p} i={i} />
-          ))}
+          {DA_PROJECTS.map((p,i) => <DAProjectCard key={i} p={p} i={i} />)}
         </div>
       </div>
     </section>
@@ -1449,9 +1282,7 @@ function Skills() {
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white">The full stack.</h2>
         </div>
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          {SKILL_GROUPS.map((g,gi) => (
-            <SkillCard key={gi} g={g} gi={gi} />
-          ))}
+          {SKILL_GROUPS.map((g,gi) => <SkillCard key={gi} g={g} gi={gi} />)}
         </div>
       </div>
     </section>
@@ -1470,12 +1301,8 @@ function CertCard({ c, i }) {
         onMouseEnter={e=>{e.currentTarget.style.borderColor=`${c.color}55`;}}
         onMouseLeave={e=>{e.currentTarget.style.borderColor=`${c.color}${inProg?'35':'22'}`;}}>
         <div className="flex items-start justify-between mb-4">
-          <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
-            style={{background:`${c.color}18`,border:`1px solid ${c.color}35`}}>
-            {c.icon}
-          </div>
-          <span className={`font-mono text-[0.56rem] tracking-widest px-2 py-0.5 rounded-full ${inProg?'':'opacity-80'}`}
-            style={{color:c.color,border:`1px solid ${c.color}40`,background:`${c.color}0a`}}>
+          <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style={{background:`${c.color}18`,border:`1px solid ${c.color}35`}}>{c.icon}</div>
+          <span className={`font-mono text-[0.56rem] tracking-widest px-2 py-0.5 rounded-full ${inProg?'':'opacity-80'}`} style={{color:c.color,border:`1px solid ${c.color}40`,background:`${c.color}0a`}}>
             {inProg?'IN PROGRESS':'COMPLETED'}
           </span>
         </div>
@@ -1507,9 +1334,7 @@ function Certifications() {
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white">Credentials.</h2>
         </div>
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          {CERTS.map((c,i) => (
-            <CertCard key={i} c={c} i={i} />
-          ))}
+          {CERTS.map((c,i) => <CertCard key={i} c={c} i={i} />)}
         </div>
       </div>
     </section>
@@ -1529,7 +1354,7 @@ function Contact() {
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Let's talk pipelines.</h2>
           <p className="font-body text-slate-400 mb-10 leading-relaxed text-sm">
-            Open to Data Engineering roles — Azure pipelines, real-time streaming, greenfield data infrastructure. Targeting <span className="text-white font-medium">14 LPA</span>. Notice period 30 days (negotiable).
+            Open to Data Engineering roles — Azure pipelines, real-time streaming, greenfield data infrastructure. Notice period 30 days (negotiable).
           </p>
           <a href="mailto:neerajguleria956@gmail.com"
             className="group inline-flex items-center gap-3 px-8 py-4 rounded-xl mb-8 font-mono text-sm tracking-wider transition-all duration-300 hover:-translate-y-0.5"
@@ -1541,9 +1366,9 @@ function Contact() {
           </a>
           <div className="flex flex-wrap justify-center gap-3 mb-10">
             {[
-              {label:'GitHub',   href:'https://github.com/Neeraj600',                 color:'#CCCCCC'},
-              {label:'LinkedIn', href:'https://www.linkedin.com/in/neeraj-guleria',   color:'#50B4FC'},
-              {label:'Phone',    href:'tel:+916006207946',                            color:'#10B981'},
+              {label:'GitHub',   href:'https://github.com/Neeraj600',               color:'#CCCCCC'},
+              {label:'LinkedIn', href:'https://www.linkedin.com/in/neeraj-guleria', color:'#50B4FC'},
+              {label:'Phone',    href:'tel:+916006207946',                          color:'#10B981'},
             ].map(l=>(
               <a key={l.label} href={l.href} target={l.href.startsWith('http')?'_blank':undefined} rel="noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono text-xs tracking-wider transition-all duration-200 hover:-translate-y-0.5"
@@ -1558,7 +1383,7 @@ function Contact() {
             {[
               {dot:'#10B981',text:'New Delhi, India'},
               {dot:'#0078D4',text:'30 days notice (negotiable)'},
-              {dot:'#F59E0B',text:'Targeting 14 LPA'},
+              
             ].map(item=>(
               <span key={item.text} className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full" style={{background:item.dot,animation:'pulseGlow 2s ease-in-out infinite'}}/>
@@ -1578,12 +1403,9 @@ function Footer() {
   return (
     <footer className="py-8 px-6 text-center" style={{borderTop:'1px solid rgba(0,120,212,0.12)'}}>
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-        <div className="font-mono text-xs text-slate-600 tracking-widest">
-          © 2026 · Neeraj Singh Guleria · Azure Data Engineer
-        </div>
+        <div className="font-mono text-xs text-slate-600 tracking-widest">© 2026 · Neeraj Singh Guleria · Azure Data Engineer</div>
         <div className="font-mono text-xs" style={{color:'rgba(0,120,212,0.4)'}}>
-          neeraj<span style={{color:'rgba(245,158,11,0.5)'}}>.</span>
-          <span style={{color:'rgba(0,212,255,0.4)'}}>dev</span>
+          neeraj<span style={{color:'rgba(245,158,11,0.5)'}}>.</span><span style={{color:'rgba(0,212,255,0.4)'}}>dev</span>
         </div>
         <div className="flex items-center gap-2 font-mono text-xs text-slate-700">
           <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" style={{animation:'pulseGlow 2s ease-in-out infinite'}}/>
@@ -1597,36 +1419,15 @@ function Footer() {
 // ── FLOATING DOWNLOAD FAB ────────────────────────────────────────────────────
 
 function FloatingDownload() {
-  const { dark } = useTheme();
   const [visible, setVisible] = useState(false);
-
   useEffect(() => {
     const fn = () => setVisible(window.scrollY > 400);
     window.addEventListener('scroll', fn);
     return () => window.removeEventListener('scroll', fn);
   }, []);
-
   return (
-    <a
-      href="Neeraj_Singh_Guleria_Resume.pdf"
-      download="Neeraj_Singh_Guleria_Resume.pdf"
-      title="Download Resume PDF"
-      className="dl-btn"
-      style={{
-        position: 'fixed',
-        bottom: '2rem',
-        right: '2rem',
-        zIndex: 60,
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0) scale(1)' : 'translateY(12px) scale(0.92)',
-        transition: 'opacity 0.3s, transform 0.3s',
-        pointerEvents: visible ? 'auto' : 'none',
-        padding: '10px 18px',
-        fontSize: '0.75rem',
-        borderRadius: '8px',
-        boxShadow: '0 4px 20px rgba(16,185,129,0.25)',
-      }}
-    >
+    <a href="Neeraj_Guleria_Resume.pdf" download="Neeraj_Guleria_Resume.pdf" title="Download Resume PDF" className="dl-btn"
+      style={{position:'fixed',bottom:'2rem',right:'2rem',zIndex:60,opacity:visible?1:0,transform:visible?'translateY(0) scale(1)':'translateY(12px) scale(0.92)',transition:'opacity 0.3s, transform 0.3s',pointerEvents:visible?'auto':'none',padding:'10px 18px',fontSize:'0.75rem',borderRadius:'8px',boxShadow:'0 4px 20px rgba(16,185,129,0.25)'}}>
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
         <polyline points="7 10 12 15 17 10"/>
@@ -1637,9 +1438,10 @@ function FloatingDownload() {
   );
 }
 
+// ── APP ──────────────────────────────────────────────────────────────────────
+
 function App() {
   const [dark, setDark] = useState(true);
-
   const toggle = () => {
     setDark(prev => {
       const next = !prev;
@@ -1647,11 +1449,7 @@ function App() {
       return next;
     });
   };
-
-  // Apply class on mount
-  useEffect(() => {
-    document.body.classList.toggle('light', !dark);
-  }, []);
+  useEffect(() => { document.body.classList.toggle('light', !dark); }, []);
 
   return (
     <ThemeCtx.Provider value={{ dark, toggle }}>
